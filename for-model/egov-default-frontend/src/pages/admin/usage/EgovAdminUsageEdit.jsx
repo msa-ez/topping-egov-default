@@ -11,7 +11,6 @@ import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 
 function EgovAdminUsageEdit(props) {
     console.group("EgovAdminUsageEdit");
-    console.log("[Start] EgovAdminUsageEdit ------------------------------");
     console.log("EgovAdminUsageEdit [props] : ", props);
 
     const navigate = useNavigate();
@@ -174,7 +173,6 @@ function EgovAdminUsageEdit(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log("------------------------------EgovAdminUsageEdit [End]");
     console.groupEnd("EgovAdminUsageEdit");
 
     return (

@@ -12,7 +12,6 @@ import { itemIdxByPage } from 'utils/calc';
 
 function EgovGalleryList(props) {
     console.group("EgovGalleryList");
-    console.log("[Start] EgovGalleryList ------------------------------");
     console.log("EgovGalleryList [props] : ", props);
 
     const location = useLocation();
@@ -99,7 +98,6 @@ function EgovGalleryList(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log("------------------------------EgovGalleryList [End]");
     console.groupEnd("EgovGalleryList");
     return (
         <div className="container">

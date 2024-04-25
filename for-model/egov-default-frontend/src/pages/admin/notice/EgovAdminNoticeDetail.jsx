@@ -12,7 +12,6 @@ import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 
 function EgovAdminNoticeDetail(props) {
     console.group("EgovAdminNoticeDetail");
-    console.log("------------------------------");
     console.log("EgovAdminNoticeDetail [props] : ", props);
 
     const navigate = useNavigate();

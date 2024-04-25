@@ -9,7 +9,6 @@ import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 
 function EgovAdminScheduleList(props) {
     console.group("EgovAdminScheduleList");
-    console.log("[Start] EgovAdminScheduleList ------------------------------");
     console.log("EgovAdminScheduleList [props] : ", props);
     
     const location = useLocation();
@@ -212,7 +211,6 @@ function EgovAdminScheduleList(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [scheduleList]);
 
-    console.log("------------------------------EgovAdminScheduleList [End]");
     console.groupEnd("EgovAdminScheduleList");
     return (
         <div className="container">

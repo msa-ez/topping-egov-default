@@ -13,7 +13,6 @@ import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 
 function EgovAdminGalleryDetail(props) {
     console.group("EgovAdminGalleryDetail");
-    console.log("------------------------------");
     console.log("EgovAdminGalleryDetail [props] : ", props);
 
     const navigate = useNavigate();

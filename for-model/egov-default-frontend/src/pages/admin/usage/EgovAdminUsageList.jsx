@@ -11,7 +11,6 @@ import { itemIdxByPage } from 'utils/calc';
 
 function EgovAdminUsageList(props) {
     console.group("EgovAdminUsageList");
-    console.log("[Start] EgovAdminUsageList ------------------------------");
     console.log("EgovAdminUsageList [props] : ", props);
 
     const location = useLocation();
@@ -88,7 +87,6 @@ function EgovAdminUsageList(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log("------------------------------EgovAdminUsageList [End]");
     console.groupEnd("EgovAdminUsageList");
 
     return (
