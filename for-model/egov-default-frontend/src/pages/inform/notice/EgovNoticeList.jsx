@@ -200,9 +200,11 @@ function EgovNoticeList(props) {
 export default EgovNoticeList;
 
 
+
 <function>
-                    
-window.$HandleBars.registerHelper('wrap2', function (exp) {
-                    return '{{'+exp+'}}';
-                })
+
+window.$HandleBars.registerHelper('wrap2', function (options) {
+    return '{{'+options.fn(this)+'}}';
+})
+
 </function>
