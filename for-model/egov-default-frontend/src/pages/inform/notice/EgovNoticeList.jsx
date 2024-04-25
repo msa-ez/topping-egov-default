@@ -62,12 +62,12 @@ function EgovNoticeList(props) {
 
                     mutListTag.push(
                         <Link
-                            to={{{pathname: URL.INFORM_NOTICE_DETAIL}}}
-                            state={{{
+                            to={{#wrap2}}pathname: URL.INFORM_NOTICE_DETAIL{{/wrap2}}
+                            state={{#wrap2}}
                                 nttId: item.nttId,
                                 bbsId: item.bbsId,
                                 searchCondition: searchCondition
-                            }}}
+                            {{/wrap2}}
                             key={listIdx}
                             className="list_item" >
                             <div>{listIdx}</div>
@@ -198,3 +198,11 @@ function EgovNoticeList(props) {
 
 
 export default EgovNoticeList;
+
+
+<function>
+                    
+window.$HandleBars.registerHelper('wrap2', function (exp) {
+                    return '{{'+exp+'}}';
+                })
+</function>
