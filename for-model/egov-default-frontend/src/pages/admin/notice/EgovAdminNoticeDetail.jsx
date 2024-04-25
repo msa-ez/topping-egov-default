@@ -137,7 +137,7 @@ function EgovAdminNoticeDetail(props) {
 								{masterBoard.bbsUseFlag === 'Y' &&
 	                                <div className="left_col btn3">
 	                                    <Link to={{#wrap2}}pathname: URL.ADMIN_NOTICE_MODIFY{{/wrap2}} 
-	                                        state={{#wrap2
+	                                        state={{#wrap2}}
 	                                            nttId: nttId,
 	                                            bbsId: bbsId
 	                                        {{/wrap2}}
@@ -148,7 +148,7 @@ function EgovAdminNoticeDetail(props) {
 	                                    }}>삭제</a>
 										{masterBoard.replyPosblAt === 'Y' &&
 	                                    <Link to={{#wrap2}}pathname: URL.ADMIN_NOTICE_REPLY{{/wrap2}} 
-	                                        state={{#wrap2
+	                                        state={{#wrap2}}
 	                                            nttId: nttId,
 	                                            bbsId: bbsId
 	                                        {{/wrap2}}
@@ -158,7 +158,7 @@ function EgovAdminNoticeDetail(props) {
 								}
                                 <div className="right_col btn1">
                                     <Link to={{#wrap2}}pathname: URL.ADMIN_NOTICE{{/wrap2}}
-                                        state={{#wrap2
+                                        state={{#wrap2}}
                                             nttId: nttId,
                                             bbsId: bbsId,
                                             searchCondition: searchCondition

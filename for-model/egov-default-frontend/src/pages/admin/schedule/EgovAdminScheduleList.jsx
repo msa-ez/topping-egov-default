@@ -161,7 +161,7 @@ function EgovAdminScheduleList(props) {
                                                     return (
                                                         <>
                                                             <Link to={{#wrap2}}pathname: URL.ADMIN_SCHEDULE_DETAIL{{/wrap2}} 
-                                                            state={{#wrap2}schdulId : schedule.schdulId{{/wrap2}}
+                                                            state={{#wrap2}}schdulId : schedule.schdulId{{/wrap2}}
                                                             key={keyIdx++}>{schedule.schdulNm}
                                                             </Link>
                                                             <br />

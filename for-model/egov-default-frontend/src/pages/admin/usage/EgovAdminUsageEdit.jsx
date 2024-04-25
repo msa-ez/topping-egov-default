@@ -289,7 +289,7 @@ function EgovAdminUsageEdit(props) {
                                             : 
                                             <Link
                                                 to={{#wrap2}}pathname: URL.INFORM_NOTICE {{/wrap2}}
-                                                state={{#wrap2}
+                                                state={{#wrap2}}
                                                     bbsId: boardDetail.bbsId
                                                 {{/wrap2}}
                                             >
