@@ -112,8 +112,8 @@ function EgovNoticeList(props) {
                 <div className="location">
                     <ul>
                         <li><Link to={URL.MAIN} className="home">Home</Link></li>
-                        <li><Link to={URL.INFORM}>알림마당</Link></li>
-                        <li>{masterBoard && masterBoard.bbsNm}</li>
+                        <li><Link to={URL.INFORM}>{{#ifNotNull boundedContext.displayName boundedContext.namePascalCase}}{{/ifNotNull}}</Link></li>
+                        <li>{{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}</li>
                     </ul>
                 </div>
                 {/* <!--// Location --> */}
@@ -127,10 +127,10 @@ function EgovNoticeList(props) {
                         {/* <!-- 본문 --> */}
 
                         <div className="top_tit">
-                            <h1 className="tit_1">알림마당</h1>
+                            <h1 className="tit_1">{{#ifNotNull boundedContext.displayName boundedContext.namePascalCase}}{{/ifNotNull}}</h1>
                         </div>
 
-                        <h2 className="tit_2">{masterBoard && masterBoard.bbsNm}</h2>
+                        <h2 className="tit_2">{{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}</h2>
 
                         {/* <!-- 검색조건 --> */}
                         <div className="condition">
@@ -173,11 +173,11 @@ function EgovNoticeList(props) {
                         {/* <!-- 게시판목록 --> */}
                         <div className="board_list BRD002">
                             <div className="head">
-                                <span>번호</span>
-                                <span>제목</span>
-                                <span>작성자</span>
-                                <span>작성일</span>
-                                <span>조회수</span>
+
+                        {{#aggregateRoot.fieldDescriptors}}
+                                <span>{{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}</span>
+                {{/aggregateRoot.fieldDescriptors}}
+                            
                             </div>
                             <div className="result">
                                 {listTag}

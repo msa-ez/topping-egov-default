@@ -7,7 +7,9 @@ import URL from 'constants/url';
 
     {{#boundedContexts}}
     		    {{#aggregates}}
-              import {{pascalCase name}} from 'pages/{{camelCase boundedContext.name}}/{{pascalCase name}}';
+import {{pascalCase name}} from 'pages/{{camelCase boundedContext.name}}/{{pascalCase name}}List';
+import {{pascalCase name}} from 'pages/{{camelCase boundedContext.name}}/{{pascalCase name}}Detail';
+import {{pascalCase name}} from 'pages/{{camelCase boundedContext.name}}/{{pascalCase name}}Edit';
     		    {{/aggregates}}
 		    {{/boundedContexts}}
 
