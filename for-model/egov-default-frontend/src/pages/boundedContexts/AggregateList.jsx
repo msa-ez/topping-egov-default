@@ -38,7 +38,7 @@ function EgovNoticeList(props) {
     const retrieveList = useCallback((searchCondition) => {
         console.groupCollapsed("EgovNoticeList.retrieveList()");
 
-        const retrieveListURL = '/board'+EgovNet.getQueryString(searchCondition);;
+        const retrieveListURL = '/{{namePlural}}'+EgovNet.getQueryString(searchCondition);;
         const requestOptions = {
             method: "GET",
             headers: {
@@ -49,31 +49,26 @@ function EgovNoticeList(props) {
         EgovNet.requestFetch(retrieveListURL,
             requestOptions,
             (resp) => {
-                setMasterBoard(resp.result.brdMstrVO);
-                setPaginationInfo(resp.result.paginationInfo);
-                setUser(resp.result.user);
 
                 let mutListTag = [];
                 mutListTag.push(<p className="no_data" key="0">검색된 결과가 없습니다.</p>); // 게시판 목록 초기값
                 
-                const resultCnt = parseInt(resp.result.resultCnt);
-                const currentPageNo = resp.result.paginationInfo.currentPageNo;
-                const pageSize = resp.result.paginationInfo.pageSize;
+                const resultCnt = parseInt(resp.page.totalElements);
+                const currentPageNo = resp.page.number;
+                const pageSize = resp.page.size;
 
                 // 리스트 항목 구성
-                resp.result.resultList.forEach(function (item, index) {
+                resp._embedded.orders.forEach(function (item, index) {
                     if (index === 0) mutListTag = []; // 목록 초기화
                     const listIdx = itemIdxByPage(resultCnt , currentPageNo, pageSize, index);
 
                     mutListTag.push(
                         <Link
-                            to={{#wrap2}}pathname: URL.INFORM_NOTICE_DETAIL{{/wrap2}}
-                            state={{#wrap2}}
-                                nttId: item.nttId,
-                                bbsId: item.bbsId,
+                            to={{pathname: "/pages/{{camelCase boundedContext.name}}/{{pascalCase name}}Detail"}}
+                            state={{
+                                nttId: item.{{camelCase aggregateRoot.keyFieldDescriptor.name}},
                                 searchCondition: searchCondition
-                            {{/wrap2}}
-                            key={listIdx}
+}}                            key={listIdx}
                             className="list_item" >
                             <div>{listIdx}</div>
                             {(item.replyLc * 1 ? true : false) &&
@@ -98,6 +93,7 @@ function EgovNoticeList(props) {
         );
         console.groupEnd("EgovNoticeList.retrieveList()");
     },[]);
+
 
     useEffect(() => {
         retrieveList(searchCondition);
