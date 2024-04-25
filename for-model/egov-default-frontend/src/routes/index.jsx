@@ -3,12 +3,11 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import CODE from 'constants/code';
 import URL from 'constants/url';
-import { } from { pascalCase, name };
 
 
     {{#boundedContexts}}
     		    {{#aggregates}}
-} from 'pages/{{camelCase boundedContext.name}}/{{pascalCase name}}';
+              import {{pascalCase name}} from 'pages/{{camelCase boundedContext.name}}/{{pascalCase name}}';
     		    {{/aggregates}}
 		    {{/boundedContexts}}
 
