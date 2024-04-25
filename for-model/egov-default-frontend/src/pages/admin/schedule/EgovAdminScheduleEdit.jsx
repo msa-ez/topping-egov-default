@@ -175,7 +175,6 @@ function EgovAdminScheduleEdit(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log("------------------------------EgovAdminScheduleEdit [End]");
     console.groupEnd("EgovAdminScheduleEdit");
     return (
         <div className="container">

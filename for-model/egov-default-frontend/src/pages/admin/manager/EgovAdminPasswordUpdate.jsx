@@ -66,7 +66,6 @@ function EgovAdminPasswordUpdate(props) {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log("------------------------------EgovAdminPasswordUpdate [End]");
     console.groupEnd("EgovAdminPasswordUpdate");
 
     return (

@@ -1,15 +1,13 @@
-import React from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 import * as EgovNet from 'api/egovFetch';
 
-import URL from 'constants/url';
 import CODE from 'constants/code';
+import URL from 'constants/url';
 import { getSessionItem, setSessionItem } from 'utils/storage';
 
 function EgovHeader() {
     console.group("EgovHeader");
-    console.log("[Start] EgovHeader ------------------------------");
 
     const sessionUser = getSessionItem('loginUser');
     const sessionUserId = sessionUser?.id;
@@ -53,7 +51,6 @@ function EgovHeader() {
         );
     }
 
-    console.log("------------------------------EgovHeader [End]");
     console.groupEnd("EgovHeader");
 
     return (

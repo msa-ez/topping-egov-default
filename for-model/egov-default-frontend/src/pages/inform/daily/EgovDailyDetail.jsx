@@ -70,7 +70,6 @@ function EgovDailyDetail(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log("------------------------------EgovDailyDetail [End]");
     console.groupEnd("EgovDailyDetail");
     return (
         <div className="container">

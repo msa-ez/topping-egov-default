@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import * as EgovNet from 'api/egovFetch';
+import { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import URL from 'constants/url';
 import CODE from 'constants/code';
+import URL from 'constants/url';
 import { getLocalItem, setLocalItem, setSessionItem } from 'utils/storage';
 
 function EgovLoginContent(props) {
     console.group("EgovLoginContent");
-    console.log("[Start] EgovLoginContent ------------------------------");
     console.log("EgovLoginContent [props] : ", props);
 
     const navigate = useNavigate();
@@ -93,7 +92,6 @@ function EgovLoginContent(props) {
             })
     }
 
-    console.log("------------------------------EgovLoginContent [End]");
     console.groupEnd("EgovLoginContent");
     
     return (

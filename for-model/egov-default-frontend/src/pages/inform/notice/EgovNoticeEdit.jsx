@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import * as EgovNet from 'api/egovFetch';
-import URL from 'constants/url';
-import CODE from 'constants/code';
 import { NOTICE_BBS_ID } from 'config';
+import CODE from 'constants/code';
+import URL from 'constants/url';
 
-import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavInform';
 import EgovAttachFile from 'components/EgovAttachFile';
+import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavInform';
 import bbsFormVaildator from 'utils/bbsFormVaildator';
 
 function EgovNoticeEdit(props) {
     console.group("EgovNoticeEdit");
-    console.log("------------------------------");
     console.log("EgovNoticeEdit [props] : ", props);
 
     const navigate = useNavigate();
