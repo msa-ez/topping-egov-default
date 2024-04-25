@@ -64,11 +64,12 @@ function EgovNoticeList(props) {
 
                     mutListTag.push(
                         <Link
-                            to={{pathname: "/pages/{{camelCase boundedContext.name}}/{{pascalCase name}}Detail"}}
-                            state={{
+                            to={{#wrap2}}pathname: "/pages/{{camelCase boundedContext.name}}/{{pascalCase name}}Detail"{{/wrap2}}
+                            state={{#wrap2}}
                                 nttId: item.{{camelCase aggregateRoot.keyFieldDescriptor.name}},
                                 searchCondition: searchCondition
-}}                            key={listIdx}
+                            {{/wrap2}}
+                            key={listIdx}
                             className="list_item" >
                             <div>{listIdx}</div>
                             {(item.replyLc * 1 ? true : false) &&
