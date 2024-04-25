@@ -58,11 +58,11 @@ function EgovAdminBoardList(props) {
 
                     mutListTag.push(
                         <Link
-                            to={{{pathname: URL.ADMIN_BOARD_MODIFY}}}
-                            state={{{
+                            to={{#wrap2}}pathname: URL.ADMIN_BOARD_MODIFY{{/wrap2}}
+                            state={{#wrap2}}
                                 bbsId: item.bbsId,
                                 searchCondition: searchCondition
-                            }}}
+                            {{/wrap2}}
                             key={listIdx}
                             className="list_item">
                             <div>{listIdx}</div>

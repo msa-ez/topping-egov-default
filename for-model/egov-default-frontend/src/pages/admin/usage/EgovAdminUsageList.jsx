@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import * as EgovNet from 'api/egovFetch';
 import URL from 'constants/url';
 
-import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 import EgovPaging from 'components/EgovPaging';
+import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 
 import { itemIdxByPage } from 'utils/calc';
 
@@ -57,12 +57,12 @@ function EgovAdminUsageList(props) {
 
                     mutListTag.push(
                         <Link
-                            to={{pathname: URL.ADMIN_USAGE_MODIFY}}
-                            state={{
+                            to={{#wrap2}}pathname: URL.ADMIN_USAGE_MODIFY{{/wrap2}}
+                            state={{#wrap2}}
                                 bbsId: item.bbsId,
                                 trgetId: item.trgetId,
                                 searchCondition: srchCnd
-                            }}
+                            {{/wrap2}}
                             key={listIdx}
                             className="list_item">
                             <div>{listIdx}</div>

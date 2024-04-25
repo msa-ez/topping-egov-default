@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import * as EgovNet from 'api/egovFetch';
-import URL from 'constants/url';
 import CODE from 'constants/code';
+import URL from 'constants/url';
 
 import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 
@@ -151,7 +151,7 @@ function EgovAdminScheduleList(props) {
                             if (scheduleList.length > 0) {//일정 있는 경우
                                 return (
                                     <td key={keyIdx++}>
-                                        <Link to={{pathname: URL.ADMIN_SCHEDULE_CREATE}} state={{iUseDate : mutsUseYearMonth + sDate + "000000"}} className="day" key={keyIdx++}>{day}</Link><br />
+                                        <Link to={{#wrap2}}pathname: URL.ADMIN_SCHEDULE_CREATE{{/wrap2}} state={{#wrap2}}iUseDate : mutsUseYearMonth + sDate + "000000"{{/wrap2}} className="day" key={keyIdx++}>{day}</Link><br />
                                         {
                                             scheduleList.map((schedule, scheduleIdx) => {
                                                 let iBeginDate = Number(schedule.schdulBgnde.substring(0, 8));
@@ -161,8 +161,8 @@ function EgovAdminScheduleList(props) {
                                                 if (iUseDate >= iBeginDate && iUseDate <= iEndDate) {
                                                     return (
                                                         <>
-                                                            <Link to={{pathname: URL.ADMIN_SCHEDULE_DETAIL}} 
-                                                            state={{schdulId : schedule.schdulId}}
+                                                            <Link to={{#wrap2}}pathname: URL.ADMIN_SCHEDULE_DETAIL{{/wrap2}} 
+                                                            state={{#wrap2}schdulId : schedule.schdulId{{/wrap2}}
                                                             key={keyIdx++}>{schedule.schdulNm}
                                                             </Link>
                                                             <br />
@@ -176,7 +176,7 @@ function EgovAdminScheduleList(props) {
                             } else {//일정 없는 경우
                                 return (
                                     <td key={keyIdx++}>
-                                        <Link to={{pathname: URL.ADMIN_SCHEDULE_CREATE}} state={{iUseDate : mutsUseYearMonth + sDate + "000000"}} className="day" key={keyIdx++}>{day}</Link><br />
+                                        <Link to={{#wrap2}}pathname: URL.ADMIN_SCHEDULE_CREATE{{/wrap2}} state={{#wrap2}}iUseDate : mutsUseYearMonth + sDate + "000000"{{/wrap2}} className="day" key={keyIdx++}>{day}</Link><br />
                                     </td>);
                             }
                         } else if (day === 0) {// 이전달/다음달 구현

@@ -51,11 +51,11 @@ function EgovDailyList(props) {
             listCnt++;
             mutListTag.push(
                 <Link
-                    to={{pathname: URL.INFORM_DAILY_DETAIL}}
-                    state={{
+                    to={{#wrap2}}pathname: URL.INFORM_DAILY_DETAIL{{/wrap2}}
+                    state={{#wrap2}}
                         schdulId : item.schdulId,
                         prevPath: URL.INFORM_DAILY
-                    }}
+                    {{/wrap2}}
                     key={listCnt}
                     className="list_item" >
                     <div>{getTimeForm(item.schdulBgnde)} ~ {getTimeForm(item.schdulEndde)}</div>

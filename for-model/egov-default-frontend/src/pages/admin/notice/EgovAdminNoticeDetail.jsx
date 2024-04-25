@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import * as EgovNet from 'api/egovFetch';
-import URL from 'constants/url';
-import CODE from 'constants/code';
 import { NOTICE_BBS_ID } from 'config';
+import CODE from 'constants/code';
+import URL from 'constants/url';
 
-import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 import EgovAttachFile from 'components/EgovAttachFile';
+import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 
 function EgovAdminNoticeDetail(props) {
     console.group("EgovAdminNoticeDetail");
@@ -137,33 +137,33 @@ function EgovAdminNoticeDetail(props) {
                             <div className="board_btn_area">
 								{masterBoard.bbsUseFlag === 'Y' &&
 	                                <div className="left_col btn3">
-	                                    <Link to={{pathname: URL.ADMIN_NOTICE_MODIFY}} 
-	                                        state={{
+	                                    <Link to={{#wrap2}}pathname: URL.ADMIN_NOTICE_MODIFY{{/wrap2}} 
+	                                        state={{#wrap2
 	                                            nttId: nttId,
 	                                            bbsId: bbsId
-	                                        }}
+	                                        {{/wrap2}}
 	                                        className="btn btn_skyblue_h46 w_100">수정</Link>
 	                                    <a href="#!" className="btn btn_skyblue_h46 w_100" onClick={(e) => {
 	                                        e.preventDefault();
 	                                        onClickDeleteBoardArticle(boardDetail.bbsId, boardDetail.nttId);
 	                                    }}>삭제</a>
 										{masterBoard.replyPosblAt === 'Y' &&
-	                                    <Link to={{pathname: URL.ADMIN_NOTICE_REPLY}} 
-	                                        state={{
+	                                    <Link to={{#wrap2}}pathname: URL.ADMIN_NOTICE_REPLY{{/wrap2}} 
+	                                        state={{#wrap2
 	                                            nttId: nttId,
 	                                            bbsId: bbsId
-	                                        }}
+	                                        {{/wrap2}}
 	                                        className="btn btn_skyblue_h46 w_100">답글작성</Link>
 										}
 	                                </div>
 								}
                                 <div className="right_col btn1">
-                                    <Link to={{pathname: URL.ADMIN_NOTICE}}
-                                        state={{
+                                    <Link to={{#wrap2}}pathname: URL.ADMIN_NOTICE{{/wrap2}}
+                                        state={{#wrap2
                                             nttId: nttId,
                                             bbsId: bbsId,
                                             searchCondition: searchCondition
-                                        }}
+                                        {{/wrap2}}
                                         className="btn btn_blue_h46 w_100">목록</Link>
                                 </div>
                             </div>

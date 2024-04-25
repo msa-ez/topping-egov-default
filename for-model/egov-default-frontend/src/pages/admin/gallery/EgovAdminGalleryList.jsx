@@ -59,12 +59,12 @@ function EgovAdminGalleryList(props) {
                     const listIdx = itemIdxByPage(resultCnt , currentPageNo, pageSize, index);
 
                     mutListTag.push(
-                        <Link to={{pathname: URL.ADMIN_GALLERY_DETAIL}} 
-                            state={{
+                        <Link to={{#wrap2}}pathname: URL.ADMIN_GALLERY_DETAIL{{/wrap2}} 
+                            state={{#wrap2}}
                                 nttId: item.nttId,
                                 bbsId: item.bbsId,
                                 searchCondition: searchCondition
-                            }}
+                            {{/wrap2}}
                             key={listIdx} className="list_item" >
                             <div>{listIdx}</div>
                             {(item.replyLc * 1 ? true : false) &&
@@ -155,7 +155,7 @@ function EgovAdminGalleryList(props) {
                                 </li>
                                 {masterBoard.bbsUseFlag === 'Y' &&
                                     <li>
-                                        <Link to={URL.ADMIN_GALLERY_CREATE} state={{bbsId: bbsId}} className="btn btn_blue_h46 pd35">등록</Link>
+                                        <Link to={URL.ADMIN_GALLERY_CREATE} state={{#wrap2}}bbsId: bbsId{{/wrap2}} className="btn btn_blue_h46 pd35">등록</Link>
                                     </li>
                                 }
                             </ul>

@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import * as EgovNet from 'api/egovFetch';
-import URL from 'constants/url';
 import CODE from 'constants/code';
+import URL from 'constants/url';
 
-import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 import EgovRadioButtonGroup from 'components/EgovRadioButtonGroup';
+import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 
 
 function EgovAdminUsageEdit(props) {
@@ -281,19 +281,19 @@ function EgovAdminUsageEdit(props) {
                                             boardDetail.bbsId === 'BBSMSTR_BBBBBBBBBBBB'                                             
                                             ? 
                                             <Link
-                                                to={{pathname: URL.INFORM_GALLERY }}
-                                                state={{
+                                                to={{#wrap2}}pathname: URL.INFORM_GALLERY {{/wrap2}}
+                                                state={{#wrap2}}
                                                     bbsId: boardDetail.bbsId
-                                                }}
+                                                {{/wrap2}}
                                             >
                                                 {`${boardDetail.bbsId}`}
                                             </Link>
                                             : 
                                             <Link
-                                                to={{pathname: URL.INFORM_NOTICE }}
-                                                state={{
+                                                to={{#wrap2}}pathname: URL.INFORM_NOTICE {{/wrap2}}
+                                                state={{#wrap2}
                                                     bbsId: boardDetail.bbsId
-                                                }}
+                                                {{/wrap2}}
                                             >
                                                 {`${boardDetail.bbsId}`}
                                             </Link>

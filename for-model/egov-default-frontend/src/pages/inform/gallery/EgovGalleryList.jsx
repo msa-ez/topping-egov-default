@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import * as EgovNet from 'api/egovFetch';
-import URL from 'constants/url';
 import { GALLERY_BBS_ID } from 'config';
+import URL from 'constants/url';
 
-import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavInform';
 import EgovPaging from 'components/EgovPaging';
+import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavInform';
 
 import { itemIdxByPage } from 'utils/calc';
 
@@ -62,12 +62,12 @@ function EgovGalleryList(props) {
                     const listIdx = itemIdxByPage(resultCnt , currentPageNo, pageSize, index);
 
                     mutListTag.push(
-                        <Link to={{pathname: URL.INFORM_GALLERY_DETAIL}}
-                            state={{
+                        <Link to={{#wrap2}}pathname: URL.INFORM_GALLERY_DETAIL{{/wrap2}}
+                            state={{#wrap2}}
                                 nttId: item.nttId,
                                 bbsId: item.bbsId,
                                 searchCondition: searchCondition
-                            }}
+                            {{/wrap2}}
                             key={listIdx} className="list_item" >
                             <div>{listIdx}</div>
                             {(item.replyLc * 1 ? true : false) &&
@@ -159,7 +159,7 @@ function EgovGalleryList(props) {
                                 </li>
                                 {user.id && masterBoard.bbsUseFlag === 'Y' &&
                                     <li>
-                                        <Link to={URL.INFORM_GALLERY_CREATE} state={{bbsId: bbsId}} className="btn btn_blue_h46 pd35">등록</Link>
+                                        <Link to={URL.INFORM_GALLERY_CREATE} state={{#wrap2}}bbsId: bbsId{{/wrap2}} className="btn btn_blue_h46 pd35">등록</Link>
                                     </li>
                                 }
                             </ul>

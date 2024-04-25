@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import * as EgovNet from 'api/egovFetch';
-import URL from 'constants/url';
 import CODE from 'constants/code';
+import URL from 'constants/url';
 
-import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 import EgovAttachFile from 'components/EgovAttachFile';
+import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 
 function EgovAdminScheduleDetail(props) {
     console.group("EgovAdminScheduleDetail");
@@ -172,10 +172,10 @@ function EgovAdminScheduleDetail(props) {
                             <div className="board_btn_area">
                                 {user.id &&
                                     <div className="left_col btn1">
-                                        <Link to={{pathname: URL.ADMIN_SCHEDULE_MODIFY}}
-                                            state={{
+                                        <Link to={{#wrap2}}pathname: URL.ADMIN_SCHEDULE_MODIFY{{/wrap2}}
+                                            state={{#wrap2
                                                 schdulId: location.state?.schdulId
-                                            }}
+                                            {{/wrap2}}
                                             className="btn btn_skyblue_h46 w_100">수정</Link>
                                         <button className="btn btn_skyblue_h46 w_100"
                                             onClick={(e) => {

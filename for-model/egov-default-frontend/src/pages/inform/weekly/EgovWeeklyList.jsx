@@ -108,11 +108,11 @@ function EgovWeeklyList(props) {
                                 return (
                                     <Link
                                         key={subKeyPropertyCnt}
-                                        to={{pathname: URL.INFORM_WEEKLY_DETAIL}} 
-                                        state={{
+                                        to={{#wrap2}}pathname: URL.INFORM_WEEKLY_DETAIL{{/wrap2}} 
+                                        state={{#wrap2}}
                                             schdulId: item.schdulId,
                                             prevPath: URL.INFORM_WEEKLY
-                                        }}
+                                        {{/wrap2}}
                                         >
                                         <span>{getTimeForm(item.schdulBgnde)} ~ {getTimeForm(item.schdulEndde)}</span>
                                         <span>{item.schdulNm}</span>

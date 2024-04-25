@@ -141,33 +141,33 @@ function EgovGalleryDetail(props) {
                             <div className="board_btn_area">
                                 {user.id && masterBoard.bbsUseFlag === 'Y' &&
                                     <div className="left_col btn3">
-                                        <Link to={{pathname: URL.INFORM_GALLERY_MODIFY}}
-                                            state={{
+                                        <Link to={{#wrap2}}pathname: URL.INFORM_GALLERY_MODIFY{{/wrap2}}
+                                            state={{#wrap2
                                                 nttId: nttId,
                                                 bbsId: bbsId
-                                            }}
+                                            {{/wrap2}}
                                             className="btn btn_skyblue_h46 w_100">수정</Link>
                                         <a href="#!" className="btn btn_skyblue_h46 w_100" onClick={(e) => {
                                             e.preventDefault();
                                             onClickDeleteBoardArticle(boardDetail.bbsId, boardDetail.nttId);
                                         }}>삭제</a>
 										{masterBoard.replyPosblAt === 'Y' &&
-                                        <Link to={{pathname: URL.INFORM_GALLERY_REPLY}}
-                                            state={{
+                                        <Link to={{#wrap2}}pathname: URL.INFORM_GALLERY_REPLY{{/wrap2}}
+                                            state={{#wrap2}}
                                                 nttId: nttId,
                                                 bbsId: bbsId
-                                            }}
+                                            {{/wrap2}}
                                             className="btn btn_skyblue_h46 w_100">답글작성</Link>
 										}
                                     </div>
                                 }
                                 <div className="right_col btn1">
-                                    <Link to={{pathname: URL.INFORM_GALLERY}}
-                                        state={{
+                                    <Link to={{#wrap2}}pathname: URL.INFORM_GALLERY{{/wrap2}}
+                                        state={{#wrap2}}
                                             nttId: nttId,
                                             bbsId: bbsId,
                                             searchCondition: searchCondition
-                                        }}
+                                        {{/wrap2}}
                                         className="btn btn_blue_h46 w_100">목록</Link>
                                 </div>
                             </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import * as EgovNet from 'api/egovFetch';
@@ -46,11 +46,11 @@ function EgovMain(props) {
                     mutNotiListTag.push(
                         <li key={item.nttId}>
                             <Link
-                                to={{pathname: URL.INFORM_NOTICE_DETAIL}}
-                                state={{
+                                to={{#wrap2}}pathname: URL.INFORM_NOTICE_DETAIL{{/wrap2}}
+                                state={{#wrap2}}
                                     nttId: item.nttId,
                                     bbsId: item.bbsId
-                                }}
+                                {{/wrap2}}
                             >
                                 {item.nttSj}
                                 <span>{item.frstRegisterPnttm}</span>
@@ -69,11 +69,11 @@ function EgovMain(props) {
                     mutGallaryListTag.push(
                         <li key={item.nttId}>
                             <Link
-                                to={{pathname: URL.INFORM_GALLERY_DETAIL}}
-                                state={{
+                                to={{#wrap2}}pathname: URL.INFORM_GALLERY_DETAIL{{/wrap2}}
+                                state={{#wrap2}}
                                     nttId: item.nttId,
                                     bbsId: item.bbsId
-                                }}
+                                {{/wrap2}}
                             >
                                 {item.nttSj}
                                 <span>{item.frstRegisterPnttm}</span>
