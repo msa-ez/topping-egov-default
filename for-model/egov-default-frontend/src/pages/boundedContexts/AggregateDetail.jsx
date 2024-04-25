@@ -1,6 +1,7 @@
 
 forEach: Aggregate
-path: egov-default-fronted/src/pages/{{boundedContext.namePascalCase}}/{{namePascalCase}}Detail.vue
+fileName: {{namePascalCase}}Detail.vue
+path: egov-default-frontend/src/pages/{{camelCase boundedContext.name}}
 ----
     import { useEffect, useState } from 'react'
 
