@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import * as EgovNet from 'api/egovFetch';
-import URL from 'constants/url';
 import CODE from 'constants/code';
+import URL from 'constants/url';
 
 import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavInform';
 
 function EgovDailyList(props) {
     console.group("EgovDailyDetail");
-    console.log("[Start] EgovDailyDetail ------------------------------");
     console.log("EgovDailyDetail [props] : ", props);
 
     const location = useLocation();
@@ -122,7 +121,6 @@ function EgovDailyList(props) {
     }, [scheduleList]);
 
 
-    console.log("------------------------------EgovDailyDetail [End]");
     console.groupEnd("EgovDailyDetail");
     return (
         <div className="container">

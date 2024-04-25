@@ -1,18 +1,17 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import * as EgovNet from 'api/egovFetch';
-import URL from 'constants/url';
 import { NOTICE_BBS_ID } from 'config';
+import URL from 'constants/url';
 
-import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavInform';
 import EgovPaging from 'components/EgovPaging';
+import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavInform';
 
 import { itemIdxByPage } from 'utils/calc';
 
 function EgovNoticeList(props) {
     console.group("EgovNoticeList");
-    console.log("[Start] EgovNoticeList ------------------------------");
     console.log("EgovNoticeList [props] : ", props);
 
     const location = useLocation();
@@ -100,7 +99,6 @@ function EgovNoticeList(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log("------------------------------EgovNoticeList [End]");
     console.groupEnd("EgovNoticeList");
     return (
         <div className="container">

@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import * as EgovNet from 'api/egovFetch';
-import URL from 'constants/url';
 import CODE from 'constants/code';
+import URL from 'constants/url';
 
 import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavInform';
 
 function EgovWeeklyList(props) {
     console.group("EgovWeeklyList");
-    console.log("[Start] EgovWeeklyList ------------------------------");
     console.log("EgovWeeklyList [props] : ", props);
 
     const location = useLocation();
@@ -182,7 +181,6 @@ function EgovWeeklyList(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[scheduleList]);
 
-    console.log("------------------------------EgovWeeklyList [End]");
     console.groupEnd("EgovWeeklyList");
     return (
         <div className="container">
