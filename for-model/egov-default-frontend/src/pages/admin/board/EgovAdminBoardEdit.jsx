@@ -1,17 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import * as EgovNet from 'api/egovFetch';
-import URL from 'constants/url';
 import CODE from 'constants/code';
+import URL from 'constants/url';
 
-import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 import EgovRadioButtonGroup from 'components/EgovRadioButtonGroup';
+import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 
 
 function EgovAdminBoardEdit(props) {
     console.group("EgovAdminBoardEdit");
-    console.log("[Start] EgovAdminBoardEdit ------------------------------");
     console.log("EgovAdminBoardEdit [props] : ", props);
 
     const navigate = useNavigate();

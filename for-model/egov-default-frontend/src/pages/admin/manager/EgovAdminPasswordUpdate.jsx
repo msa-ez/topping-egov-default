@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import * as EgovNet from 'api/egovFetch';
-import URL from 'constants/url';
-import CODE from 'constants/code';
 import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
+import CODE from 'constants/code';
+import URL from 'constants/url';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function EgovAdminPasswordUpdate(props) {
     console.group("EgovAdminPasswordUpdate");
-    console.log("[Start] EgovAdminPasswordUpdate ------------------------------");
     console.log("EgovAdminPasswordUpdate [props] : ", props);
 
     const navigate = useNavigate();

@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import * as EgovNet from 'api/egovFetch';
-import URL from 'constants/url';
 import CODE from 'constants/code';
+import URL from 'constants/url';
 
-import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 import EgovAttachFile from 'components/EgovAttachFile';
 import EgovRadioButtonGroup from 'components/EgovRadioButtonGroup';
+import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
 function EgovAdminScheduleEdit(props) {
     console.group("EgovAdminScheduleEdit");
-    console.log("[Start] EgovAdminScheduleEdit ------------------------------");
     console.log("EgovAdminScheduleEdit [props] : ", props);
 
     const navigate = useNavigate();
