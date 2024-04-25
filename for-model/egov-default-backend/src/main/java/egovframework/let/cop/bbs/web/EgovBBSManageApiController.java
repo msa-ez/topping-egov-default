@@ -51,12 +51,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
  * 게시물 관리를 위한 컨트롤러 클래스
+ * 
  * @author 공통 서비스 개발팀 이삼섭
  * @since 2009.03.19
  * @version 1.0
  * @see
  *
- * <pre>
+ *      <pre>
  * << 개정이력(Modification Information) >>
  *
  *   수정일      수정자          수정내용
@@ -65,12 +66,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  *  2009.06.29  한성곤	       2단계 기능 추가 (댓글관리, 만족도조사)
  *  2011.08.31  JJY            경량환경 템플릿 커스터마이징버전 생성
  *
- *  </pre>
+ *      </pre>
  */
 @RestController
-@Tag(name="EgovBBSManageApiController",description = "게시물 관리")
+@Tag(name = "EgovBBSManageApiController", description = "게시물 관리")
 public class EgovBBSManageApiController {
-	
+
 	@Resource(name = "EgovBBSManageService")
 	private EgovBBSManageService bbsMngService;
 
@@ -91,27 +92,24 @@ public class EgovBBSManageApiController {
 
 	@Resource(name = "EgovFileMngService")
 	private EgovFileMngService fileService;
-	
+
 	/** 암호화서비스 */
-    @Resource(name="egovARIACryptoService")
-    EgovCryptoService cryptoService;
+	@Resource(name = "egovARIACryptoService")
+	EgovCryptoService cryptoService;
 
-	//---------------------------------
 	// 2009.06.29 : 2단계 기능 추가
-	//---------------------------------
-	//SHT-CUSTOMIZING//@Resource(name = "EgovBBSCommentService")
-	//SHT-CUSTOMIZING//private EgovBBSCommentService bbsCommentService;
+	// SHT-CUSTOMIZING//@Resource(name = "EgovBBSCommentService")
+	// SHT-CUSTOMIZING//private EgovBBSCommentService bbsCommentService;
 
-	//SHT-CUSTOMIZING//@Resource(name = "EgovBBSSatisfactionService")
-	//SHT-CUSTOMIZING//private EgovBBSSatisfactionService bbsSatisfactionService;
+	// SHT-CUSTOMIZING//@Resource(name = "EgovBBSSatisfactionService")
+	// SHT-CUSTOMIZING//private EgovBBSSatisfactionService bbsSatisfactionService;
 
-	//SHT-CUSTOMIZING//@Resource(name = "EgovBBSScrapService")
-	//SHT-CUSTOMIZING//private EgovBBSScrapService bbsScrapService;
-	////-------------------------------
+	// SHT-CUSTOMIZING//@Resource(name = "EgovBBSScrapService")
+	// SHT-CUSTOMIZING//private EgovBBSScrapService bbsScrapService;
 
 	@Autowired
 	private DefaultBeanValidator beanValidator;
-	
+
 	/**
 	 * 게시판 마스터 상세내용을 조회한다.
 	 * 파일 첨부 가능 여부 조회용
@@ -121,41 +119,37 @@ public class EgovBBSManageApiController {
 	 * @return resultVO
 	 * @throws Exception
 	 */
-	@Operation(
-			summary = "게시판 파일 첨부 관련 정보 조회",
-			description = "게시판의 파일 첨부가능 여부 및 첨부가능 파일 수 조회",
-			tags = {"EgovBBSManageApiController"}
-	)
+	@Operation(summary = "게시판 파일 첨부 관련 정보 조회", description = "게시판의 파일 첨부가능 여부 및 첨부가능 파일 수 조회", tags = {
+			"EgovBBSManageApiController" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "조회 성공"),
 			@ApiResponse(responseCode = "403", description = "인가된 사용자가 아님")
 	})
 	@GetMapping(value = "/boardFileAtch/{bbsId}")
 	public ResultVO selectUserBBSMasterInf(
-			@Parameter(name = "bbsId", description = "게시판 Id", in = ParameterIn.PATH, example="BBSMSTR_AAAAAAAAAAAA")
-			@PathVariable("bbsId") String bbsId)
-		throws Exception {
+			@Parameter(name = "bbsId", description = "게시판 Id", in = ParameterIn.PATH, example = "BBSMSTR_AAAAAAAAAAAA") @PathVariable("bbsId") String bbsId)
+			throws Exception {
 		ResultVO resultVO = new ResultVO();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		
+
 		BoardMasterVO searchVO = new BoardMasterVO();
 		searchVO.setBbsId(bbsId);
-		
+
 		BoardMasterVO master = bbsAttrbService.selectBBSMasterInf(searchVO);
-		
+
 		// 파일 첨부 외의 다른 정보를 전달하지 않기 위해 신규 객체 생성
 		BoardMasterVO masterFileAtchInfo = new BoardMasterVO();
-		
+
 		masterFileAtchInfo.setFileAtchPosblAt(master.getFileAtchPosblAt());
 		masterFileAtchInfo.setPosblAtchFileNumber(master.getPosblAtchFileNumber());
 		masterFileAtchInfo.setPosblAtchFileSize(master.getPosblAtchFileSize());
-		
+
 		resultMap.put("brdMstrVO", masterFileAtchInfo);
-		
+
 		resultVO.setResult(resultMap);
 		resultVO.setResultCode(ResponseCode.SUCCESS.getCode());
 		resultVO.setResultMessage(ResponseCode.SUCCESS.getMessage());
-		
+
 		return resultVO;
 	}
 
@@ -166,33 +160,22 @@ public class EgovBBSManageApiController {
 	 * @return resultVO
 	 * @throws Exception
 	 */
-	@Operation(
-			summary = "게시물 목록 조회",
-			description = "게시물에 대한 목록을 조회",
-			tags = {"EgovBBSManageApiController"}
-	)
+	@Operation(summary = "게시물 목록 조회", description = "게시물에 대한 목록을 조회", tags = { "EgovBBSManageApiController" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "조회 성공"),
 			@ApiResponse(responseCode = "403", description = "인가된 사용자가 아님")
 	})
 	@GetMapping(value = "/board")
 	public ResultVO selectBoardArticles(
-			@Parameter(
-					in = ParameterIn.QUERY,
-					schema = @Schema(type = "object",
-							additionalProperties = Schema.AdditionalPropertiesValue.TRUE, 
-							ref = "#/components/schemas/searchBbsMap"),
-					style = ParameterStyle.FORM,
-					explode = Explode.TRUE
-			) @RequestParam Map<String, Object> commandMap, 
+			@Parameter(in = ParameterIn.QUERY, schema = @Schema(type = "object", additionalProperties = Schema.AdditionalPropertiesValue.TRUE, ref = "#/components/schemas/searchBbsMap"), style = ParameterStyle.FORM, explode = Explode.TRUE) @RequestParam Map<String, Object> commandMap,
 			@Parameter(hidden = true) @AuthenticationPrincipal LoginVO user)
-		throws Exception {
+			throws Exception {
 		ResultVO resultVO = new ResultVO();
 		BoardVO boardVO = new BoardVO();
-		
-		boardVO.setBbsId((String)commandMap.get("bbsId"));
-		boardVO.setSearchCnd((String)commandMap.get("searchCnd"));
-		boardVO.setSearchWrd((String)commandMap.get("searchWrd"));
+
+		boardVO.setBbsId((String) commandMap.get("bbsId"));
+		boardVO.setSearchCnd((String) commandMap.get("searchCnd"));
+		boardVO.setSearchWrd((String) commandMap.get("searchWrd"));
 
 		BoardMasterVO vo = new BoardMasterVO();
 		vo.setBbsId(boardVO.getBbsId());
@@ -211,7 +194,7 @@ public class EgovBBSManageApiController {
 
 		Map<String, Object> resultMap = bbsMngService.selectBoardArticles(boardVO, vo.getBbsAttrbCode());
 
-		int totCnt = Integer.parseInt((String)resultMap.get("resultCnt"));
+		int totCnt = Integer.parseInt((String) resultMap.get("resultCnt"));
 		paginationInfo.setTotalRecordCount(totCnt);
 
 		resultMap.put("boardVO", boardVO);
@@ -233,55 +216,44 @@ public class EgovBBSManageApiController {
 	 * @return resultVO
 	 * @throws Exception
 	 */
-	@Operation(
-			summary = "게시물 상세 조회",
-			description = "게시물에 대한 상세 정보를 조회",
-			tags = {"EgovBBSManageApiController"}
-	)
+	@Operation(summary = "게시물 상세 조회", description = "게시물에 대한 상세 정보를 조회", tags = { "EgovBBSManageApiController" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "조회 성공"),
 			@ApiResponse(responseCode = "403", description = "인가된 사용자가 아님")
 	})
 	@GetMapping(value = "/board/{bbsId}/{nttId}")
 	public ResultVO selectBoardArticle(
-			@Parameter(name = "bbsId", description = "게시판 Id", in = ParameterIn.PATH, example="BBSMSTR_AAAAAAAAAAAA")
-			@PathVariable("bbsId") String bbsId,
-			@Parameter(name = "nttId", description = "게시글 Id", in = ParameterIn.PATH, example="1")
-			@PathVariable("nttId") String nttId,
+			@Parameter(name = "bbsId", description = "게시판 Id", in = ParameterIn.PATH, example = "BBSMSTR_AAAAAAAAAAAA") @PathVariable("bbsId") String bbsId,
+			@Parameter(name = "nttId", description = "게시글 Id", in = ParameterIn.PATH, example = "1") @PathVariable("nttId") String nttId,
 			@Parameter(hidden = true) @AuthenticationPrincipal LoginVO user)
-		throws Exception {
+			throws Exception {
 
 		ResultVO resultVO = new ResultVO();
 		BoardVO boardVO = new BoardVO();
-		
+
 		boardVO.setBbsId(bbsId);
 		boardVO.setNttId(Long.parseLong(nttId));
 
 		// 조회수 증가 여부 지정
 		boardVO.setPlusCount(true);
 
-		//---------------------------------
 		// 2009.06.29 : 2단계 기능 추가
-		//---------------------------------
 		if (!boardVO.getSubPageIndex().equals("")) {
 			boardVO.setPlusCount(false);
 		}
-		////-------------------------------
 
 		boardVO.setLastUpdusrId(user.getUniqId());
 		BoardVO vo = bbsMngService.selectBoardArticle(boardVO);
 
-		//----------------------------
-		// template 처리 (기본 BBS template 지정  포함)
-		//----------------------------
+		// template 처리 (기본 BBS template 지정 포함)
 		BoardMasterVO master = new BoardMasterVO();
 
 		master.setBbsId(boardVO.getBbsId());
 		master.setUniqId(user.getUniqId());
 
 		BoardMasterVO masterVo = bbsAttrbService.selectBBSMasterInf(master);
-		
-		//model.addAttribute("brdMstrVO", masterVo);
+
+		// model.addAttribute("brdMstrVO", masterVo);
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("boardVO", vo);
@@ -295,13 +267,14 @@ public class EgovBBSManageApiController {
 			FileVO fileVO = new FileVO();
 			fileVO.setAtchFileId(vo.getAtchFileId());
 			List<FileVO> resultFiles = fileService.selectFileInfs(fileVO);
-			
+
 			// FileId를 유추하지 못하도록 암호화하여 표시한다. (2022.12.06 추가) - 파일아이디가 유추 불가능하도록 조치
 			for (FileVO file : resultFiles) {
 				String toEncrypt = file.atchFileId;
-				file.setAtchFileId(Base64.getEncoder().encodeToString(cryptoService.encrypt(toEncrypt.getBytes(),EgovFileDownloadController.ALGORITM_KEY)));
+				file.setAtchFileId(Base64.getEncoder().encodeToString(
+						cryptoService.encrypt(toEncrypt.getBytes(), EgovFileDownloadController.ALGORITM_KEY)));
 			}
-						
+
 			resultMap.put("resultFiles", resultFiles);
 		}
 
@@ -321,25 +294,20 @@ public class EgovBBSManageApiController {
 	 * @return resultVO
 	 * @throws Exception
 	 */
-	@Operation(
-			summary = "게시물 수정",
-			description = "게시물에 대한 내용을 수정",
-			security = {@SecurityRequirement(name = "Authorization")},
-			tags = {"EgovBBSManageApiController"}
-	)
+	@Operation(summary = "게시물 수정", description = "게시물에 대한 내용을 수정", security = {
+			@SecurityRequirement(name = "Authorization") }, tags = { "EgovBBSManageApiController" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "수정 성공"),
 			@ApiResponse(responseCode = "403", description = "인가된 사용자가 아님"),
 			@ApiResponse(responseCode = "900", description = "입력값 무결성 오류")
 	})
-	@PutMapping(value ="/board/{nttId}")
+	@PutMapping(value = "/board/{nttId}")
 	public ResultVO updateBoardArticle(final MultipartHttpServletRequest multiRequest,
-		BoardVO boardVO,
-		@Parameter(name = "nttId", description = "게시글 Id", in = ParameterIn.PATH, example="1")
-		@PathVariable("nttId") String nttId,
-		BindingResult bindingResult,
-		HttpServletRequest request)
-		throws Exception {
+			BoardVO boardVO,
+			@Parameter(name = "nttId", description = "게시글 Id", in = ParameterIn.PATH, example = "1") @PathVariable("nttId") String nttId,
+			BindingResult bindingResult,
+			HttpServletRequest request)
+			throws Exception {
 		ResultVO resultVO = new ResultVO();
 
 		// 사용자권한 처리
@@ -356,7 +324,7 @@ public class EgovBBSManageApiController {
 
 			return resultVO;
 		}
-	
+
 		final Map<String, MultipartFile> files = multiRequest.getFileMap();
 		if (!files.isEmpty()) {
 			if ("".equals(atchFileId)) {
@@ -374,8 +342,9 @@ public class EgovBBSManageApiController {
 
 		boardVO.setNttId(Long.parseLong(nttId));
 		boardVO.setLastUpdusrId(user.getUniqId());
-		boardVO.setNtcrNm(""); // dummy 오류 수정 (익명이 아닌 경우 validator 처리를 위해 dummy로 지정됨) 
-		boardVO.setPassword(EgovFileScrty.encryptPassword("", user.getUniqId())); // dummy 오류 수정 (익명이 아닌 경우 validator 처리를 위해 dummy로 지정됨)
+		boardVO.setNtcrNm(""); // dummy 오류 수정 (익명이 아닌 경우 validator 처리를 위해 dummy로 지정됨)
+		boardVO.setPassword(EgovFileScrty.encryptPassword("", user.getUniqId())); // dummy 오류 수정 (익명이 아닌 경우 validator
+																					// 처리를 위해 dummy로 지정됨)
 		boardVO.setNttCn(unscript(boardVO.getNttCn())); // XSS 방지
 
 		bbsMngService.updateBoardArticle(boardVO);
@@ -396,23 +365,19 @@ public class EgovBBSManageApiController {
 	 * @return
 	 * @throws Exception
 	 */
-	@Operation(
-			summary = "게시물 등록",
-			description = "게시물을 등록",
-			security = {@SecurityRequirement(name = "Authorization")},
-			tags = {"EgovBBSManageApiController"}
-	)
+	@Operation(summary = "게시물 등록", description = "게시물을 등록", security = {
+			@SecurityRequirement(name = "Authorization") }, tags = { "EgovBBSManageApiController" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "등록 성공"),
 			@ApiResponse(responseCode = "403", description = "인가된 사용자가 아님"),
 			@ApiResponse(responseCode = "900", description = "입력값 무결성 오류")
 	})
-	@PostMapping(value ="/board")
+	@PostMapping(value = "/board")
 	public ResultVO insertBoardArticle(final MultipartHttpServletRequest multiRequest,
-		BoardVO boardVO,
-		BindingResult bindingResult,
-		HttpServletRequest request)
-		throws Exception {
+			BoardVO boardVO,
+			BindingResult bindingResult,
+			HttpServletRequest request)
+			throws Exception {
 		ResultVO resultVO = new ResultVO();
 
 		LoginVO user = new LoginVO();
@@ -425,7 +390,7 @@ public class EgovBBSManageApiController {
 
 			return resultVO;
 		}
-	
+
 		List<FileVO> result = null;
 		String atchFileId = "";
 
@@ -439,11 +404,11 @@ public class EgovBBSManageApiController {
 		boardVO.setBbsId(boardVO.getBbsId());
 
 		boardVO.setNtcrNm(""); // dummy 오류 수정 (익명이 아닌 경우 validator 처리를 위해 dummy로 지정됨)
-		boardVO.setPassword(EgovFileScrty.encryptPassword("", user.getUniqId())); // dummy 오류 수정 (익명이 아닌 경우 validator 처리를 위해 dummy로 지정됨)
+		boardVO.setPassword(EgovFileScrty.encryptPassword("", user.getUniqId())); // dummy 오류 수정 (익명이 아닌 경우 validator
+																					// 처리를 위해 dummy로 지정됨)
 		// board.setNttCn(unscript(board.getNttCn())); // XSS 방지
 
 		bbsMngService.insertBoardArticle(boardVO);
-	
 
 		resultVO.setResultCode(ResponseCode.SUCCESS.getCode());
 		resultVO.setResultMessage(ResponseCode.SUCCESS.getMessage());
@@ -456,27 +421,23 @@ public class EgovBBSManageApiController {
 	 * @param multiRequest
 	 * @param boardVO
 	 * @param bindingResult
-	 * @param request 
+	 * @param request
 	 * @return resultVO
 	 * @throws Exception
 	 */
-	@Operation(
-			summary = "게시물 답변 등록",
-			description = "게시물에 대한 답변을 등록",
-			security = {@SecurityRequirement(name = "Authorization")},
-			tags = {"EgovBBSManageApiController"}
-	)
+	@Operation(summary = "게시물 답변 등록", description = "게시물에 대한 답변을 등록", security = {
+			@SecurityRequirement(name = "Authorization") }, tags = { "EgovBBSManageApiController" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "등록 성공"),
 			@ApiResponse(responseCode = "403", description = "인가된 사용자가 아님"),
 			@ApiResponse(responseCode = "900", description = "입력값 무결성 오류")
 	})
-	@PostMapping(value ="/boardReply")
+	@PostMapping(value = "/boardReply")
 	public ResultVO replyBoardArticle(final MultipartHttpServletRequest multiRequest,
-		BoardVO boardVO,
-		BindingResult bindingResult,
-		HttpServletRequest request)
-		throws Exception {
+			BoardVO boardVO,
+			BindingResult bindingResult,
+			HttpServletRequest request)
+			throws Exception {
 		ResultVO resultVO = new ResultVO();
 
 		LoginVO user = new LoginVO();
@@ -489,7 +450,7 @@ public class EgovBBSManageApiController {
 
 			return resultVO;
 		}
-		
+
 		final Map<String, MultipartFile> files = multiRequest.getFileMap();
 		String atchFileId = "";
 
@@ -507,14 +468,14 @@ public class EgovBBSManageApiController {
 		boardVO.setReplyLc(Integer.toString(Integer.parseInt(boardVO.getReplyLc()) + 1));
 
 		boardVO.setNtcrNm(""); // dummy 오류 수정 (익명이 아닌 경우 validator 처리를 위해 dummy로 지정됨)
-		boardVO.setPassword(EgovFileScrty.encryptPassword("", user.getUniqId())); // dummy 오류 수정 (익명이 아닌 경우 validator 처리를 위해 dummy로 지정됨)
+		boardVO.setPassword(EgovFileScrty.encryptPassword("", user.getUniqId())); // dummy 오류 수정 (익명이 아닌 경우 validator
+																					// 처리를 위해 dummy로 지정됨)
 
 		boardVO.setNttCn(unscript(boardVO.getNttCn())); // XSS 방지
 
 		bbsMngService.insertBoardArticle(boardVO);
-	
 
-		//return "forward:/cop/bbs/selectBoardList.do";
+		// return "forward:/cop/bbs/selectBoardList.do";
 		resultVO.setResultCode(ResponseCode.SUCCESS.getCode());
 		resultVO.setResultMessage(ResponseCode.SUCCESS.getMessage());
 		return resultVO;
@@ -529,26 +490,20 @@ public class EgovBBSManageApiController {
 	 * @return resultVO
 	 * @throws Exception
 	 */
-	@Operation(
-			summary = "게시물 삭제",
-			description = "게시물에 대한 내용을 삭제",
-			security = {@SecurityRequirement(name = "Authorization")},
-			tags = {"EgovBBSManageApiController"}
-	)
+	@Operation(summary = "게시물 삭제", description = "게시물에 대한 내용을 삭제", security = {
+			@SecurityRequirement(name = "Authorization") }, tags = { "EgovBBSManageApiController" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "삭제 성공"),
 			@ApiResponse(responseCode = "403", description = "인가된 사용자가 아님")
 	})
 	@PatchMapping(value = "/board/{bbsId}/{nttId}")
 	public ResultVO deleteBoardArticle(
-		@Parameter(name = "bbsId", description = "게시판 Id", in = ParameterIn.PATH, example="BBSMSTR_AAAAAAAAAAAA")	
-		@PathVariable("bbsId") String bbsId,
-		@Parameter(name = "nttId", description = "게시글 Id", in = ParameterIn.PATH, example="1")
-		@PathVariable("nttId") String nttId,
-		@Parameter(hidden = true) @AuthenticationPrincipal LoginVO user,
-		HttpServletRequest request)
+			@Parameter(name = "bbsId", description = "게시판 Id", in = ParameterIn.PATH, example = "BBSMSTR_AAAAAAAAAAAA") @PathVariable("bbsId") String bbsId,
+			@Parameter(name = "nttId", description = "게시글 Id", in = ParameterIn.PATH, example = "1") @PathVariable("nttId") String nttId,
+			@Parameter(hidden = true) @AuthenticationPrincipal LoginVO user,
+			HttpServletRequest request)
 
-		throws Exception {
+			throws Exception {
 		ResultVO resultVO = new ResultVO();
 		BoardVO boardVO = new BoardVO();
 
@@ -557,7 +512,7 @@ public class EgovBBSManageApiController {
 		boardVO.setLastUpdusrId(user.getUniqId());
 
 		bbsMngService.deleteBoardArticle(boardVO);
-		
+
 		resultVO.setResultCode(ResponseCode.SUCCESS.getCode());
 		resultVO.setResultMessage(ResponseCode.SUCCESS.getMessage());
 
@@ -594,7 +549,5 @@ public class EgovBBSManageApiController {
 
 		return ret;
 	}
-	
-	
 
 }

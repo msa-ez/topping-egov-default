@@ -2,32 +2,32 @@ package egovframework.com.cmm;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * @Class Name : ComDefaultVO.java
  * @Description : ComDefaultVO class
  * @Modification Information
  * @
- * @  수정일         수정자                   수정내용
- * @ -------    --------    ---------------------------
- * @ 2009.02.01    조재영         최초 생성
+ *   @ 수정일 수정자 수정내용
+ *   @ 2009.02.01 조재영 최초 생성
  *
- *  @author 공통서비스 개발팀 조재영
- *  @since 2009.02.01
- *  @version 1.0
- *  @see
+ * @author 공통서비스 개발팀 조재영
+ * @since 2009.02.01
+ * @version 1.0
+ * @see
  *
  */
 @Getter
 @Setter
 public class ComDefaultVO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/** 검색조건 */
+    /** 검색조건 */
     private String searchCondition = "";
 
     /** 검색Keyword */
@@ -57,12 +57,11 @@ public class ComDefaultVO implements Serializable {
     /** 검색KeywordFrom */
     private String searchKeywordFrom = "";
 
-	/** 검색KeywordTo */
+    /** 검색KeywordTo */
     private String searchKeywordTo = "";
 
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
 
-    
 }

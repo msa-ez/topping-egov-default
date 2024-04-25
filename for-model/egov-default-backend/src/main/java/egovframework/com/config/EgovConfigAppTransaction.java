@@ -24,16 +24,16 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
  * @Description : Transaction 설정
  *
  * @author : 윤주호
- * @since  : 2021. 7. 20
+ * @since : 2021. 7. 20
  * @version : 1.0
  *
- * <pre>
+ *          <pre>
  * << 개정이력(Modification Information) >>
  *
  *   수정일              수정자               수정내용
  *  -------------  ------------   ---------------------
  *   2021. 7. 20    윤주호               최초 생성
- * </pre>
+ *          </pre>
  *
  */
 @Configuration
@@ -48,10 +48,6 @@ public class EgovConfigAppTransaction {
 		dataSourceTransactionManager.setDataSource(dataSource);
 		return dataSourceTransactionManager;
 	}
-
-	// -------------------------------------------------------------
-	// TransactionAdvice 설정
-	// -------------------------------------------------------------
 
 	@Bean
 	public TransactionInterceptor txAdvice(DataSourceTransactionManager txManager) {
@@ -78,15 +74,11 @@ public class EgovConfigAppTransaction {
 		return txMethods;
 	}
 
-	// -------------------------------------------------------------
-	// TransactionAdvisor 설정
-	// -------------------------------------------------------------
-
 	@Bean
 	public Advisor txAdvisor(DataSourceTransactionManager txManager) {
 		AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
 		pointcut.setExpression(
-			"execution(* egovframework.let..impl.*Impl.*(..)) or execution(* egovframework.com..*Impl.*(..))");
+				"execution(* egovframework.let..impl.*Impl.*(..)) or execution(* egovframework.com..*Impl.*(..))");
 		return new DefaultPointcutAdvisor(pointcut, txAdvice(txManager));
 	}
 }

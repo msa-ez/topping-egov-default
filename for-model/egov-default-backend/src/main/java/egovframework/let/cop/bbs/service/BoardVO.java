@@ -2,20 +2,21 @@ package egovframework.let.cop.bbs.service;
 
 import java.io.Serializable;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 게시물 관리를 위한 VO 클래스
+ * 
  * @author 공통 서비스 개발팀 이삼섭
  * @since 2009.03.19
  * @version 1.0
  * @see
  *
- * <pre>
+ *      <pre>
  * << 개정이력(Modification Information) >>
  *
  *   수정일      수정자          수정내용
@@ -24,7 +25,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  *  2009.06.29  한성곤		   2단계 기능 추가 (댓글관리, 만족도조사)
  *  2011.08.31  JJY            경량환경 템플릿 커스터마이징버전 생성
  *
- *  </pre>
+ *      </pre>
  */
 @Schema(description = "게시물 VO")
 @Getter
@@ -32,7 +33,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class BoardVO extends Board implements Serializable {
 
 	/**
-	 *  serialVersion UID
+	 * serialVersion UID
 	 */
 	private static final long serialVersionUID = -3779821913760046011L;
 
@@ -111,12 +112,8 @@ public class BoardVO extends Board implements Serializable {
 	@Schema(description = "조회 수 증가 여부")
 	private boolean plusCount = false;
 
-	//---------------------------------
-	// 2009.06.29 : 2단계 기능 추가
-	//---------------------------------
 	@Schema(description = "하위 페이지 인덱스 (댓글 및 만족도 조사 여부 확인용)")
 	private String subPageIndex = "";
-	////-------------------------------
 
 	/**
 	 * toString 메소드를 대치한다.
