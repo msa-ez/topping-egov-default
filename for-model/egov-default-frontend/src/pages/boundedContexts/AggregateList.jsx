@@ -64,7 +64,7 @@ function EgovNoticeList(props) {
 
                     mutListTag.push(
                         <Link
-                            to={{#wrap2}}pathname: "/pages/{{camelCase boundedContext.name}}/{{pascalCase name}}Detail"{{/wrap2}}
+                            to={{#wrap2}}pathname: "/{{camelCase boundedContext.name}}/{{pascalCase name}}Detail"{{/wrap2}}
                             state={{#wrap2}}
                                 nttId: item.{{camelCase aggregateRoot.keyFieldDescriptor.name}},
                                 searchCondition: searchCondition
@@ -72,17 +72,12 @@ function EgovNoticeList(props) {
                             key={listIdx}
                             className="list_item" >
                             <div>{listIdx}</div>
-                            {(item.replyLc * 1 ? true : false) &&
-                                <div className="al reply">
-                                    {item.nttSj}
-                                </div>}
-                            {(item.replyLc * 1 ? false : true) &&
-                                <div className="al">
-                                    {item.nttSj}
-                                </div>}
-                            <div>{item.frstRegisterNm}</div>
-                            <div>{item.frstRegisterPnttm}</div>
-                            <div>{item.inqireCo}</div>
+                            
+
+                        {{#aggregateRoot.fieldDescriptors}}
+                            <div>{item.{{camelCase name}} }</div>
+                {{/aggregateRoot.fieldDescriptors}}
+
                         </Link>
                     );
                 });
@@ -158,11 +153,9 @@ function EgovNoticeList(props) {
                                             }}>조회</button>
                                     </span>
                                 </li>
-                                {user.id && masterBoard.bbsUseFlag === 'Y' &&
                                     <li>
-                                        <Link to={URL.INFORM_NOTICE_CREATE} state={{#wrap2}}bbsId: bbsId{{/wrap2}} className="btn btn_blue_h46 pd35">등록</Link>
+                                        <Link to="/{{camelCase boundedContext.name}}/{{pascalCase name}}Edit" state={{#wrap2}}bbsId: bbsId{{/wrap2}} className="btn btn_blue_h46 pd35">등록</Link>
                                     </li>
-                                }
                             </ul>
                         </div>
                         {/* <!--// 검색조건 --> */}

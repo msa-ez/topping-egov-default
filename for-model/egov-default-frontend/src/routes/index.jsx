@@ -7,9 +7,9 @@ import URL from 'constants/url';
 
     {{#boundedContexts}}
     		    {{#aggregates}}
-import {{pascalCase name}} from 'pages/{{camelCase boundedContext.name}}/{{pascalCase name}}List';
-import {{pascalCase name}} from 'pages/{{camelCase boundedContext.name}}/{{pascalCase name}}Detail';
-import {{pascalCase name}} from 'pages/{{camelCase boundedContext.name}}/{{pascalCase name}}Edit';
+import {{pascalCase name}}List from 'pages/{{camelCase boundedContext.name}}/{{pascalCase name}}List';
+import {{pascalCase name}}Detail from 'pages/{{camelCase boundedContext.name}}/{{pascalCase name}}Detail';
+import {{pascalCase name}}Edit from 'pages/{{camelCase boundedContext.name}}/{{pascalCase name}}Edit';
     		    {{/aggregates}}
 		    {{/boundedContexts}}
 
@@ -147,7 +147,10 @@ const SecondRoutes = () => {
       <Routes>
     {{#boundedContexts}}
     		    {{#aggregates}}
-          <Route path="/{{boundedContext.namePlural}}/{{namePlural}}" element={<{{pascalCase name}} />} />
+          <Route path="/{{camelCase boundedContext.name}}/{{namePlural}}" element={<{{pascalCase name}}List />} />
+          <Route path="/{{camelCase boundedContext.name}}/{{pascalCase name}}Edit" element={<{{pascalCase name}}Edit />} />
+          <Route path="/{{camelCase boundedContext.name}}/{{pascalCase name}}Detail" element={<{{pascalCase name}}Detail />} />
+
     		    {{/aggregates}}
 		    {{/boundedContexts}}
 

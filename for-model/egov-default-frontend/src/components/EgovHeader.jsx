@@ -72,7 +72,7 @@ function EgovHeader() {
             {{#boundedContexts}}
     		    {{#aggregates}}
 
-                    <li><NavLink to="/{{boundedContext.namePlural}}/{{namePlural}}" className={({ isActive }) => (isActive ? "cur" : "")}>{{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}</NavLink></li>
+                    <li><NavLink to="/{{camelCase boundedContext.name}}/{{namePlural}}" className={({ isActive }) => (isActive ? "cur" : "")}>{{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}</NavLink></li>
     		    {{/aggregates}}
 
     		    {{#viewes}}
