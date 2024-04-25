@@ -142,7 +142,7 @@ function EgovGalleryDetail(props) {
                                 {user.id && masterBoard.bbsUseFlag === 'Y' &&
                                     <div className="left_col btn3">
                                         <Link to={{#wrap2}}pathname: URL.INFORM_GALLERY_MODIFY{{/wrap2}}
-                                            state={{#wrap2
+                                            state={{#wrap2}}
                                                 nttId: nttId,
                                                 bbsId: bbsId
                                             {{/wrap2}}

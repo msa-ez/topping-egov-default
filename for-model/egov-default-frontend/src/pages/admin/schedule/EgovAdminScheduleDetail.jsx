@@ -171,7 +171,7 @@ function EgovAdminScheduleDetail(props) {
                                 {user.id &&
                                     <div className="left_col btn1">
                                         <Link to={{#wrap2}}pathname: URL.ADMIN_SCHEDULE_MODIFY{{/wrap2}}
-                                            state={{#wrap2
+                                            state={{#wrap2}}
                                                 schdulId: location.state?.schdulId
                                             {{/wrap2}}
                                             className="btn btn_skyblue_h46 w_100">수정</Link>
