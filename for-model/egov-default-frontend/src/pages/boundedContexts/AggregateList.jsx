@@ -3,8 +3,8 @@ fileName: {{namePascalCase}}List.vue
 path: egov-default-frontend/src/pages/{{camelCase boundedContext.name}}
 ----
 
-    import { useCallback, useEffect, useRef, useState } from 'react'
-    import { Link, useLocation } from 'react-router-dom'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 import * as EgovNet from 'api/egovFetch'
 import { NOTICE_BBS_ID } from 'config'
@@ -163,7 +163,7 @@ function EgovNoticeList(props) {
                                 </li>
                                 {user.id && masterBoard.bbsUseFlag === 'Y' &&
                                     <li>
-                                        <Link to={URL.INFORM_NOTICE_CREATE} state={{#wrap}}bbsId: bbsId{{/wrap2}} className="btn btn_blue_h46 pd35">등록</Link>
+                                        <Link to={URL.INFORM_NOTICE_CREATE} state={{#wrap2}}bbsId: bbsId{{/wrap2}} className="btn btn_blue_h46 pd35">등록</Link>
                                     </li>
                                 }
                             </ul>
