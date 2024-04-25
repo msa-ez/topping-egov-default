@@ -1,7 +1,7 @@
 forEach: Aggregate
 fileName: {{namePascalCase}}List.jsx
 path: egov-default-frontend/src/pages/{{camelCase boundedContext.name}}
-----
+---
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
