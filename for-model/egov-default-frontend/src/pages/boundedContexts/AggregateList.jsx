@@ -1,5 +1,5 @@
 forEach: Aggregate
-fileName: {{namePascalCase}}List.vue
+fileName: {{namePascalCase}}List.jsx
 path: egov-default-frontend/src/pages/{{camelCase boundedContext.name}}
 ----
 
