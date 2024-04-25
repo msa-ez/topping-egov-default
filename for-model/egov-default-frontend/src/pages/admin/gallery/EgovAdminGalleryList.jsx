@@ -1,18 +1,17 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import * as EgovNet from 'api/egovFetch';
-import URL from 'constants/url';
 import { GALLERY_BBS_ID } from 'config';
+import URL from 'constants/url';
 
-import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 import EgovPaging from 'components/EgovPaging';
+import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavAdmin';
 
 import { itemIdxByPage } from 'utils/calc';
 
 function EgovAdminGalleryList(props) {
     console.group("EgovAdminGalleryList");
-    console.log("[Start] EgovAdminGalleryList ------------------------------");
     console.log("EgovAdminGalleryList [props] : ", props);
 
     const location = useLocation();
@@ -97,7 +96,6 @@ function EgovAdminGalleryList(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log("------------------------------EgovAdminGalleryList [End]");
     console.groupEnd("EgovAdminGalleryList");
     return (
         <div className="container">
