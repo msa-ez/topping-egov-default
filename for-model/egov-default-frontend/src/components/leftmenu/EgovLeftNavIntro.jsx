@@ -11,22 +11,23 @@ function EgovLeftNavIntro() {
 
     const lastSegment = window.parent.location.href.split('/').pop();
     
-    {{}}
-    if (lastSegment === 'orders'){
+    {{#boundedContexts}}
+    {{#aggregates}}
+    if (lastSegment === '{{namePlural}}'){
         return (
             <div className="nav">
                 <div className="inner">
-                    <h2>알림마당</h2>
+                    <h2>{{../namePascalCase}}</h2>
                     <ul className="menu4">
-                        <li><NavLink to={URL.INFORM_DAILY} className={({ isActive }) => (isActive ? "cur" : "")}>오늘의행사</NavLink></li>
-                        <li><NavLink to={URL.INFORM_WEEKLY} className={({ isActive }) => (isActive ? "cur" : "")}>금주의행사</NavLink></li>
-                        <li><NavLink to={URL.INFORM_NOTICE} className={({ isActive }) => (isActive ? "cur" : "")}>공지사항</NavLink></li>
-                        <li><NavLink to={URL.INFORM_GALLERY} className={({ isActive }) => (isActive ? "cur" : "")}>사이트갤러리</NavLink></li>
+                        <li><NavLink to="/{{../nameCamelCase}}/{{namePlural}}" className={({ isActive }) => (isActive ? "cur" : "")}>{{namePascalCase}}</NavLink></li>
                     </ul>
                 </div>
             </div>
         );
     }
+    {{/aggregates}}
+    {{/boundedContexts}}
+    return null;
 }
 
 export default EgovLeftNavIntro;
