@@ -138,7 +138,7 @@ function EgovNoticeEdit(props) {
                                 </div>
 
                                 <div className="right_col btn1">
-                                    <Link to={URL.INFORM_NOTICE} className="btn btn_blue_h46 w_100">목록</Link>
+                                    <Link to="/{{boundedContext.nameCamelCase}}/{{namePlural}}" className="btn btn_blue_h46 w_100">목록</Link>
                                 </div>
                             </div>
                             {/* <!--// 버튼영역 --> */}

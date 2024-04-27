@@ -53,7 +53,7 @@ function EgovNoticeList(props) {
                 const pageSize = resp.page.size;
 
                 // 리스트 항목 구성
-                resp._embedded.orders.forEach(function (item, index) {
+                resp._embedded.{{namePlural}}.forEach(function (item, index) {
                     if (index === 0) mutListTag = []; // 목록 초기화
                     const listIdx = itemIdxByPage(resultCnt , currentPageNo, pageSize, index);
 
@@ -66,8 +66,11 @@ function EgovNoticeList(props) {
                             {{/wrap2}}
                             key={listIdx}
                             className="list_item">
+                            <div>{item._links.self.href.split('/').pop()}</div>
                             {{#aggregateRoot.fieldDescriptors}}
+                            {{#unless isKey}}
                             <div>{item.{{#wrapField nameCamelCase}}{{/wrapField}}</div>    
+                            {{/unless}}
                             {{/aggregateRoot.fieldDescriptors}}
                         </Link>
                     );
