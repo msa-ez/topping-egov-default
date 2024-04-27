@@ -45,6 +45,8 @@ function EgovNoticeDetail(props) {
     {{/if}}
     const condition = true; 
 
+    const [entity, setEntity] = useState("");
+
     const [masterBoard, setMasterBoard] = useState({});
     const [user, setUser] = useState({});
     const [boardDetail, setBoardDetail] = useState({});
@@ -74,6 +76,20 @@ function EgovNoticeDetail(props) {
         axios.delete(`/{{namePlural}}/{{#wrapKeyField keyFieldDescriptor.name}}{{/wrapKeyField}}`)
         navigate('/{{boundedContext.nameCamelCase}}/{{namePlural}}');
     }
+    {{#if commands}}
+    {{#commands}}
+    {{#if isExtendedVerb}}
+    function {{nameCamelCase}}(){
+
+        axios.put(`/orders/{{#wrapKeyField ../keyFieldDescriptor.name}}{{/wrapKeyField}}/acceptorder`, {{{../keyFieldDescriptor.name}}: entity }) 
+        .then(response => {
+            setAcceptOrderOpen(false);
+        })
+    }
+    {{/if}}
+    {{/commands}}
+    {{/if}}
+
     return (
         <div className="container">
             <div className="c_wrap">
@@ -141,7 +157,7 @@ function EgovNoticeDetail(props) {
                                     <Link to="/{{boundedContext.nameCamelCase}}/{{namePlural}}"
                                         className="btn btn_blue_h46 w_100">목록</Link>
                                 </div>
-                                <div className="right_col btn1" style=\{{marginTop: "5px", marginRight: "11%"}}>
+                                <div className="right_col btn1" style=\{{marginTop: "5px", marginRight: "9%"}}>
                                     <button
                                         onClick={deleteList}
                                         className="btn btn_blue_h46 w_100">삭제
@@ -164,6 +180,8 @@ function EgovNoticeDetail(props) {
                                         label="{{#fieldDescriptors}}{{#if isKey}}{{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}{{/if}}{{/fieldDescriptors}}"
                                         type="text"
                                         fullWidth
+                                        value={entity}
+                                        onChange={(e) => setEntity(e.target.value)}
                                     />
                                 </DialogContent>
                                 <DialogActions>
