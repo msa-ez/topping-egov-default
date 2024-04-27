@@ -11,6 +11,7 @@ import * as EgovNet from 'api/egovFetch'
 import { NOTICE_BBS_ID } from 'config'
 import CODE from 'constants/code'
 import URL from 'constants/url'
+import axios from 'axios';
 
 import EgovAttachFile from 'components/EgovAttachFile'
 import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavInform'
@@ -40,25 +41,10 @@ function EgovNoticeEdit(props) {
                     ...modeInfo,
                     modeTitle: "등록",
                     method: "POST",
-                    editURL: '/board'
+                    editURL: '/{{namePlural}}'
                 });
                 break;
-            case CODE.MODE_MODIFY:
-                setModeInfo({
-                    ...modeInfo,
-                    modeTitle: "수정",
-                    method: "PUT",
-                    editURL: `/board/${nttId}`
-                });
-                break;
-            case CODE.MODE_REPLY:
-                setModeInfo({
-                    ...modeInfo,
-                    modeTitle: "답글쓰기",
-                    method: "POST",
-                    editURL: '/boardReply'
-                });
-                break;
+            
 			default:
                 navigate({pathname: URL.ERROR}, {state: {msg : ""}});
         }
@@ -68,27 +54,27 @@ function EgovNoticeEdit(props) {
         const formData = new FormData();
         for (let key in boardDetail) {
             formData.append(key, boardDetail[key]);
-            //console.log("boardDetail [%s] ", key, boardDetail[key]);
         }
 
-        if (bbsFormVaildator(formData)) {
-            const requestOptions = {
-                method: modeInfo.method,
-                body: formData
-            }
-    
-            EgovNet.requestFetch(modeInfo.editURL,
-                requestOptions,
-                (resp) => {
-                    if (Number(resp.resultCode) === Number(CODE.RCV_SUCCESS)) {
-                        navigate(URL.INFORM_NOTICE, {state:{bbsId : bbsId}});
-                    } else {
-                        // alert("ERR : " + resp.message);
-                        navigate({pathname: URL.ERROR}, {state: {msg : resp.resultMessage}});
-                    }
-                }
-            );
+        const entity = {
+            {{#aggregateRoot.fieldDescriptors}}
+            {{nameCamelCase}}: boardDetail.{{nameCamelCase}}{{#unless @last}},{{/unless}}
+            {{/aggregateRoot.fieldDescriptors}}
         };
+
+        axios.post('/{{namePlural}}', entity)
+        .then(response => {
+            const resp = response.data;
+            if (resp._links.self.href.split('/').pop()) {
+                navigate('/{{boundedContext.name}}/{{namePlural}}');
+            } else {
+                navigate({pathname: URL.ERROR}, {state: {msg: resp.resultMessage}});
+            }
+        })
+        .catch(error => {
+            console.error('Request failed:', error);
+            navigate({pathname: URL.ERROR}, {state: {msg: error.message}});
+        });
     };
 
 	const Location = React.memo(function Location(masterBoard) {
@@ -96,7 +82,7 @@ function EgovNoticeEdit(props) {
             <div className="location">
                 <ul>
                     <li><Link to={URL.MAIN} className="home">Home</Link></li>
-                    <li><Link to={URL.ADMIN}>사이트관리</Link></li>
+                    <li><Link to="/{{boundedContext.name}}/{{namePlural}}">{{namePascalCase}}</Link></li>
                     <li>{masterBoard && masterBoard.bbsNm}</li>
                 </ul>
             </div>
@@ -126,7 +112,7 @@ function EgovNoticeEdit(props) {
                         {/* <!-- 본문 --> */}
 
                         <div className="top_tit">
-                            <h1 className="tit_1">{{pascalCase name}}</h1>
+                            <h1 className="tit_1">{{namePascalCase}}</h1>
                         </div>
                         
                         <h2 className="tit_2">{masterBoard && masterBoard.bbsNm} {modeInfo.modeTitle}</h2>
@@ -138,8 +124,8 @@ function EgovNoticeEdit(props) {
                                     <label htmlFor="nttSj">{{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}</label>
                                 </dt>
                                 <dd>
-                                    <input className="f_input2 w_full" id="{{camelCase name}}" name="{{camelCase name}}" type="text"
-                                        onChange={e => setBoardDetail({ ...boardDetail, {{camelCase name}}: e.target.value })}
+                                    <input className="f_input2 w_full" id="{{nameCamelCase}}" name="{{nameCamelCase}}" type="text"
+                                        onChange={e => setBoardDetail({ ...boardDetail, {{nameCamelCase}}: e.target.value })}
                                         maxLength="60" />
                                 </dd>
                             </dl>

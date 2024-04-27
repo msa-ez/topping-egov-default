@@ -8,6 +8,14 @@ import { useEffect, useState } from 'react'
 
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import TextField from '@mui/material/TextField';
+
+import axios from 'axios';
+
 import * as EgovNet from 'api/egovFetch'
 import { NOTICE_BBS_ID } from 'config'
 import CODE from 'constants/code'
@@ -24,9 +32,12 @@ function EgovNoticeDetail(props) {
     const location = useLocation();
     console.log("EgovNoticeDetail [location] : ", location);
 
-    const bbsId = location.state.bbsId || NOTICE_BBS_ID;
-    const nttId = location.state.nttId;
+    // const bbsId = location.state.bbsId || NOTICE_BBS_ID;
+    const {{keyFieldDescriptor.name}} = location.state.{{keyFieldDescriptor.name}};
     const searchCondition = location.state.searchCondition;
+
+    const [open, setOpen] = useState(false);
+    const condition = true; 
 
     const [masterBoard, setMasterBoard] = useState({});
     const [user, setUser] = useState({});
@@ -34,7 +45,7 @@ function EgovNoticeDetail(props) {
     const [boardAttachFiles, setBoardAttachFiles] = useState();
 
     const retrieveDetail = () => {
-        const retrieveDetailURL = `/board/${bbsId}/${nttId}`;
+        const retrieveDetailURL = `/{{namePlural}}/{{keyFieldDescriptor.name}}`;
         const requestOptions = {
             method: "GET",
             headers: {
@@ -44,46 +55,19 @@ function EgovNoticeDetail(props) {
         EgovNet.requestFetch(retrieveDetailURL,
             requestOptions,
             function (resp) {
-                setMasterBoard(resp.result.brdMstrVO);
-                setBoardDetail(resp.result.boardVO);
-                setUser(resp.result.user);
-                setBoardAttachFiles(resp.result.resultFiles);
+                setBoardDetail(resp);
             }
         );
     }
-
-    const onClickDeleteBoardArticle = (bbsId, nttId) => {
-        const deleteBoardURL = `/board/${bbsId}/${nttId}`;
-        
-        const requestOptions = {
-            method: "PATCH",
-            headers: {
-                'Content-type': 'application/json',
-            }
-        }
-
-        EgovNet.requestFetch(deleteBoardURL,
-            requestOptions,
-            (resp) => {
-                console.log("====>>> board delete= ", resp);
-                if (Number(resp.resultCode) === Number(CODE.RCV_SUCCESS)) {
-                    alert("게시글이 삭제되었습니다.")
-                    navigate(URL.INFORM_NOTICE ,{ replace: true });
-                } else {
-                    navigate({pathname: URL.ERROR}, {state: {msg : resp.resultMessage}});
-                }
-
-            }
-        );
-    }
-
     useEffect(function () {
         retrieveDetail();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    
-    console.groupEnd("EgovNoticeDetail");
 
+    function deleteList(){
+        axios.delete(`/{{namePlural}}/{{#wrapKeyField keyFieldDescriptor.name}}{{/wrapKeyField}}`)
+        navigate('/{{boundedContext.name}}/{{namePlural}}');
+    }
     return (
         <div className="container">
             <div className="c_wrap">
@@ -91,7 +75,7 @@ function EgovNoticeDetail(props) {
                 <div className="location">
                     <ul>
                         <li><Link to={URL.MAIN} className="home">Home</Link></li>
-                        <li><Link to={URL.INFORM}>알림마당</Link></li>
+                        <li><Link to="/{{boundedContext.name}}/{{namePlural}}">{{namePascalCase}}</Link></li>
                         <li>{masterBoard && masterBoard.bbsNm}</li>
                     </ul>
                 </div>
@@ -106,77 +90,84 @@ function EgovNoticeDetail(props) {
                         {/* <!-- 본문 --> */}
 
                         <div className="top_tit">
-                            <h1 className="tit_1">알림마당</h1>
+                            <h1 className="tit_1">{{namePascalCase}}</h1>
                         </div>
-
-                        <h2 className="tit_2">{masterBoard && masterBoard.bbsNm}</h2>
 
                         {/* <!-- 게시판 상세보기 --> */}
                         <div className="board_view">
                             <div className="board_view_top">
-                                <div className="tit">{boardDetail && boardDetail.nttSj}</div>
+                                <div className="tit">{{#wrapMustache keyFieldDescriptor.name}}{{/wrapMustache}}</div>
                                 <div className="info">
                                     <dl>
-                                        <dt>작성자</dt>
-                                        <dd>{boardDetail && boardDetail.frstRegisterNm}</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>작성일</dt>
-                                        <dd>{boardDetail && boardDetail.frstRegisterPnttm}</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>조회수</dt>
-                                        <dd>{boardDetail && boardDetail.inqireCo}</dd>
+                                    {{#aggregateRoot.fieldDescriptors}}{{#if isList}}
+                                        <dt>{{nameCamelCase}}</dt>
+                                        <dd>{boardDetail && boardDetail.{{nameCamelCase}} }</dd>
+                                    {{/if}}{{/aggregateRoot.fieldDescriptors}}
                                     </dl>
                                 </div>
                             </div>
-
-                            <div className="board_article">
-                                <textarea name="" cols="30" rows="10" readOnly="readonly" defaultValue={boardDetail && boardDetail.nttCn}></textarea>
-                            </div>
-                            <div className="board_attach">
-                                {/* 답글이 아니고 게시판 파일 첨부 가능 상태에서만 첨부파일 컴포넌트 노출 */}
-                                {(boardDetail.parnts === '0') && masterBoard.fileAtchPosblAt === 'Y' && <EgovAttachFile boardFiles={boardAttachFiles} />}
-                            </div>
-
-
                             <div className="board_btn_area">
-                                {user.id && masterBoard.bbsUseFlag === 'Y' &&
-                                    <div className="left_col btn3">
-                                        <Link to={{#wrap2}}pathname: URL.INFORM_NOTICE_MODIFY{{/wrap2}}
-                                            state={{#wrap2}}
-                                                nttId: nttId,
-                                                bbsId: bbsId
-                                            {{/wrap2}}
-                                            className="btn btn_skyblue_h46 w_100">수정</Link>
-                                        <button className="btn btn_skyblue_h46 w_100" onClick={(e) => {
-                                            e.preventDefault();
-                                            onClickDeleteBoardArticle(boardDetail.bbsId, boardDetail.nttId);
-                                        }}>삭제</button>
-										{masterBoard.replyPosblAt === 'Y' &&
-                                        <Link to={{#wrap2}}pathname: URL.INFORM_NOTICE_REPLY{{/wrap2}}
-                                            state={{#wrap2}}
-                                                nttId: nttId,
-                                                bbsId: bbsId
-                                            {{/wrap2}}
-                                            className="btn btn_skyblue_h46 w_100">답글작성</Link>
-										}
+                                <div style=\{{ display: "flex", flexDirection: "row"}}>
+                                    <div style=\{{marginTop: "5px"}}>
+                                        {{#if commands}}
+                                        {{#commands}}
+                                        {{#if isExtendedVerb}}
+                                        <button className="btn btn_blue_h46 w_100"
+                                         onClick={() => {
+                                            if (condition) {  
+                                            setOpen(true);
+                                            }
+                                        }}>
+                                            {{namePascalCase}}
+                                        </button>
+                                        {{/if}}
+                                        {{/commands}}
+                                        {{/if}}
                                     </div>
-                                }
-
-                                <div className="right_col btn1">
-                                    <Link to={{#wrap2}}pathname: URL.INFORM_NOTICE{{/wrap2}}
-                                        state={{#wrap2}}
-                                            nttId: nttId,
-                                            bbsId: bbsId,
-                                            searchCondition: searchCondition
-                                        {{/wrap2}}
+                                </div>
+                                <div className="right_col btn1" style=\{{marginTop: "5px"}}>
+                                    <Link to="/{{boundedContext.name}}/{{namePlural}}"
                                         className="btn btn_blue_h46 w_100">목록</Link>
+                                </div>
+                                <div className="right_col btn1" style=\{{marginTop: "5px", marginRight: "11%"}}>
+                                    <button
+                                        onClick={deleteList}
+                                        className="btn btn_blue_h46 w_100">삭제
+                                    </button>
                                 </div>
                             </div>
                         </div>
                         {/* <!-- 게시판 상세보기 --> */}
-
+                        {{#if commands}}
+                        {{#commands}}
+                        {{#if isExtendedVerb}}
+                        <div>
+                            <Dialog open={open} onClose={() => setOpen(false)}>
+                                <DialogTitle>AcceptOrder</DialogTitle>
+                                <DialogContent>
+                                    <TextField 
+                                        autoFocus
+                                        margin="dense"
+                                        id="{{#fieldDescriptors}}{{#if isKey}}{{name}}{{/if}}{{/fieldDescriptors}}"
+                                        label="{{#fieldDescriptors}}{{#if isKey}}{{namePascalCase}}{{/if}}{{/fieldDescriptors}}"
+                                        type="text"
+                                        fullWidth
+                                    />
+                                </DialogContent>
+                                <DialogActions>
+                                    <button onClick={() => setOpen(false)} className="btn btn_blue_h46 w_100">
+                                        Cancel
+                                    </button>
+                                    <button onClick={acceptOrder} className="btn btn_blue_h46 w_100">
+                                    {{namePascalCase}}
+                                    </button>
+                                </DialogActions>
+                            </Dialog>
+                        </div>
+                        {{/if}}
+                        {{/commands}}
+                        {{/if}}
+                        
                         {/* <!--// 본문 --> */}
                     </div>
                 </div>
@@ -187,3 +178,19 @@ function EgovNoticeDetail(props) {
 
 
 export default EgovNoticeDetail;
+
+<function>
+    window.$HandleBars.registerHelper('wrapKeyField', function (keyField) {
+        if (keyField) {
+            return '${' + keyField +'}';
+        }
+        return keyField;
+    });
+    
+    window.$HandleBars.registerHelper('wrapMustache', function (keyField) {
+        if (keyField) {
+            return {keyField};
+        }
+        return keyField;
+    });
+</function>

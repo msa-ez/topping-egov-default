@@ -16,15 +16,10 @@ import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavInform'
 import { itemIdxByPage } from 'utils/calc'
 
 function EgovNoticeList(props) {
-    console.group("EgovNoticeList");
-    console.log("EgovNoticeList [props] : ", props);
 
     const location = useLocation();
-    console.log("EgovNoticeList [location] : ", location);
-
 	const cndRef = useRef();
     const wrdRef = useRef();
-
     const bbsId = location.state?.bbsId || NOTICE_BBS_ID; 
 
 	// eslint-disable-next-line no-unused-vars
@@ -64,20 +59,16 @@ function EgovNoticeList(props) {
 
                     mutListTag.push(
                         <Link
-                            to={{#wrap2}}pathname: "/{{camelCase boundedContext.name}}/{{pascalCase name}}Detail"{{/wrap2}}
+                            to={{#wrap2}}pathname: "/{{boundedContext.nameCamelCase}}/{{namePascalCase}}Detail"{{/wrap2}}
                             state={{#wrap2}}
-                                nttId: item.{{camelCase aggregateRoot.keyFieldDescriptor.name}},
+                                {{keyFieldDescriptor.name}}: item._links.self.href.split('/').pop(),
                                 searchCondition: searchCondition
                             {{/wrap2}}
                             key={listIdx}
-                            className="list_item" >
-                            <div>{listIdx}</div>
-                            
-
-                        {{#aggregateRoot.fieldDescriptors}}
-                            <div>{item.{{camelCase name}} }</div>
-                {{/aggregateRoot.fieldDescriptors}}
-
+                            className="list_item">
+                            {{#aggregateRoot.fieldDescriptors}}
+                            <div>{item.{{#wrapField nameCamelCase}}{{/wrapField}}</div>    
+                            {{/aggregateRoot.fieldDescriptors}}
                         </Link>
                     );
                 });
@@ -154,7 +145,7 @@ function EgovNoticeList(props) {
                                     </span>
                                 </li>
                                     <li>
-                                        <Link to="/{{camelCase boundedContext.name}}/{{pascalCase name}}Edit" state={{#wrap2}}bbsId: bbsId{{/wrap2}} className="btn btn_blue_h46 pd35">등록</Link>
+                                        <Link to="/{{boundedContext.nameCamelCase}}/{{namePascalCase}}Edit" state={{#wrap2}}bbsId: bbsId{{/wrap2}} className="btn btn_blue_h46 pd35">등록</Link>
                                     </li>
                             </ul>
                         </div>
@@ -166,7 +157,7 @@ function EgovNoticeList(props) {
 
                         {{#aggregateRoot.fieldDescriptors}}
                                 <span>{{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}</span>
-                {{/aggregateRoot.fieldDescriptors}}
+                        {{/aggregateRoot.fieldDescriptors}}
                             
                             </div>
                             <div className="result">
@@ -200,6 +191,13 @@ export default EgovNoticeList;
 
 window.$HandleBars.registerHelper('wrap2', function (options) {
     return '{{'+options.fn(this)+'}}';
-})
+});
+
+window.$HandleBars.registerHelper('wrapField', function (field) {
+    if(field){
+        return field + '}'
+    }
+    return field;
+});
 
 </function>
