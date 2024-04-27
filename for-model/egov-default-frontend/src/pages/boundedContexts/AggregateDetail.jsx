@@ -83,7 +83,7 @@ function EgovNoticeDetail(props) {
 
         axios.put(`/orders/{{#wrapKeyField ../keyFieldDescriptor.name}}{{/wrapKeyField}}/acceptorder`, {{#wrapHeadMustache ../keyFieldDescriptor.name}}{{/wrapHeadMustache}}: entity }) 
         .then(response => {
-            setAcceptOrderOpen(false);
+            // set{{namePascalCase}}Open(false);
         })
     }
     {{/if}}
