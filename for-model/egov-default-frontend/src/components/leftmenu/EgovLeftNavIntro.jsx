@@ -1,6 +1,6 @@
 forEach: BoundedContext
 fileName: EgovLeftNavIntro.jsx
-path: egov-default-frontend/src/leftmenu
+path: egov-default-frontend/src/components/leftmenu
 ---
 import React from 'react';
 
