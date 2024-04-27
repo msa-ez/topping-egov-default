@@ -81,7 +81,7 @@ function EgovNoticeDetail(props) {
     {{#if isExtendedVerb}}
     function {{nameCamelCase}}(){
 
-        axios.put(`/orders/{{#wrapKeyField ../keyFieldDescriptor.name}}{{/wrapKeyField}}/acceptorder`, {{{../keyFieldDescriptor.name}}: entity }) 
+        axios.put(`/orders/{{#wrapKeyField ../keyFieldDescriptor.name}}{{/wrapKeyField}}/acceptorder`, {{#wrapHeadMustache ../keyFieldDescriptor.name}}{{/wrapHeadMustache}}: entity }) 
         .then(response => {
             setAcceptOrderOpen(false);
         })
