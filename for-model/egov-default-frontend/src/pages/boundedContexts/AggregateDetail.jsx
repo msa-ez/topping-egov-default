@@ -36,7 +36,13 @@ function EgovNoticeDetail(props) {
     const {{keyFieldDescriptor.name}} = location.state.{{keyFieldDescriptor.name}};
     const searchCondition = location.state.searchCondition;
 
-    const [open, setOpen] = useState(false);
+    {{#if commands}}
+    {{#commands}}
+    {{#if isExtendedVerb}}
+    const [{{nameCamelCase}}open, set{{namePascalCase}}Open] = useState(false);
+    {{/if}}
+    {{/commands}}
+    {{/if}}
     const condition = true; 
 
     const [masterBoard, setMasterBoard] = useState({});
@@ -115,7 +121,7 @@ function EgovNoticeDetail(props) {
                                         <button className="btn btn_blue_h46 w_100"
                                          onClick={() => {
                                             if (condition) {  
-                                            setOpen(true);
+                                            set{{namePascalCase}}Open(true);
                                             }
                                         }}>
                                             {{namePascalCase}}
@@ -142,8 +148,8 @@ function EgovNoticeDetail(props) {
                         {{#commands}}
                         {{#if isExtendedVerb}}
                         <div>
-                            <Dialog open={open} onClose={() => setOpen(false)}>
-                                <DialogTitle>AcceptOrder</DialogTitle>
+                            <Dialog open={{{nameCamelCase}}open} onClose={() => set{{namePascalCase}}Open(false)}>
+                                <DialogTitle>{{namePascalCase}}</DialogTitle>
                                 <DialogContent>
                                     <TextField 
                                         autoFocus
@@ -155,10 +161,10 @@ function EgovNoticeDetail(props) {
                                     />
                                 </DialogContent>
                                 <DialogActions>
-                                    <button onClick={() => setOpen(false)} className="btn btn_blue_h46 w_100">
+                                    <button onClick={() => set{{namePascalCase}}Open(false)} className="btn btn_blue_h46 w_100">
                                         Cancel
                                     </button>
-                                    <button onClick={acceptOrder} className="btn btn_blue_h46 w_100">
+                                    <button onClick={{#wrapMustache nameCamelCase}}{{/wrapMustache}} className="btn btn_blue_h46 w_100">
                                     {{namePascalCase}}
                                     </button>
                                 </DialogActions>
@@ -187,10 +193,10 @@ export default EgovNoticeDetail;
         return keyField;
     });
     
-    window.$HandleBars.registerHelper('wrapMustache', function (keyField) {
-        if (keyField) {
-            return {keyField};
+    window.$HandleBars.registerHelper('wrapMustache', function (field) {
+        if (field) {
+            return '{'+ field + '}';
         }
-        return keyField;
+        return field;
     });
 </function>

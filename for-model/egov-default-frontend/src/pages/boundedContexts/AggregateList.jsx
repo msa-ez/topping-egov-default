@@ -98,7 +98,7 @@ function EgovNoticeList(props) {
                 <div className="location">
                     <ul>
                         <li><Link to={URL.MAIN} className="home">Home</Link></li>
-                        <li><Link to={URL.INFORM}>{{#ifNotNull boundedContext.displayName boundedContext.namePascalCase}}{{/ifNotNull}}</Link></li>
+                        <li>{{#ifNotNull boundedContext.displayName boundedContext.namePascalCase}}{{/ifNotNull}}</li>
                         <li>{{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}</li>
                     </ul>
                 </div>
