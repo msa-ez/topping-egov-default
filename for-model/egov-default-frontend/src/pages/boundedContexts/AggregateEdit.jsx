@@ -66,7 +66,7 @@ function EgovNoticeEdit(props) {
         .then(response => {
             const resp = response.data;
             if (resp._links.self.href.split('/').pop()) {
-                navigate('/{{boundedContext.name}}/{{namePlural}}');
+                navigate('/{{boundedContext.nameCamelCase}}/{{namePlural}}');
             } else {
                 navigate({pathname: URL.ERROR}, {state: {msg: resp.resultMessage}});
             }
@@ -82,7 +82,7 @@ function EgovNoticeEdit(props) {
             <div className="location">
                 <ul>
                     <li><Link to={URL.MAIN} className="home">Home</Link></li>
-                    <li><Link to="/{{boundedContext.name}}/{{namePlural}}">{{namePascalCase}}</Link></li>
+                    <li><Link to="/{{boundedContext.nameCamelCase}}/{{namePlural}}">{{namePascalCase}}</Link></li>
                     <li>{masterBoard && masterBoard.bbsNm}</li>
                 </ul>
             </div>
