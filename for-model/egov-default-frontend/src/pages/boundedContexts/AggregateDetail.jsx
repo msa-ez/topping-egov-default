@@ -1,7 +1,7 @@
 
 forEach: Aggregate
 fileName: {{namePascalCase}}Detail.jsx
-path: egov-default-frontend/src/pages/{{camelCase boundedContext.name}}
+path: egov-default-frontend/src/pages/{{boundedContext.nameCamelCase}}
 ---
 
 import { useEffect, useState } from 'react'
@@ -45,7 +45,7 @@ function EgovNoticeDetail(props) {
     const [boardAttachFiles, setBoardAttachFiles] = useState();
 
     const retrieveDetail = () => {
-        const retrieveDetailURL = `/{{namePlural}}/{{keyFieldDescriptor.name}}`;
+        const retrieveDetailURL = `/{{namePlural}}/{{#wrapKeyField keyFieldDescriptor.name}}{{/wrapKeyField}}`;
         const requestOptions = {
             method: "GET",
             headers: {
@@ -66,7 +66,7 @@ function EgovNoticeDetail(props) {
 
     function deleteList(){
         axios.delete(`/{{namePlural}}/{{#wrapKeyField keyFieldDescriptor.name}}{{/wrapKeyField}}`)
-        navigate('/{{boundedContext.name}}/{{namePlural}}');
+        navigate('/{{boundedContext.nameCamelCase}}/{{namePlural}}');
     }
     return (
         <div className="container">
@@ -75,7 +75,7 @@ function EgovNoticeDetail(props) {
                 <div className="location">
                     <ul>
                         <li><Link to={URL.MAIN} className="home">Home</Link></li>
-                        <li><Link to="/{{boundedContext.name}}/{{namePlural}}">{{namePascalCase}}</Link></li>
+                        <li><Link to="/{{boundedContext.nameCamelCase}}/{{namePlural}}">{{namePascalCase}}</Link></li>
                         <li>{masterBoard && masterBoard.bbsNm}</li>
                     </ul>
                 </div>
@@ -126,7 +126,7 @@ function EgovNoticeDetail(props) {
                                     </div>
                                 </div>
                                 <div className="right_col btn1" style=\{{marginTop: "5px"}}>
-                                    <Link to="/{{boundedContext.name}}/{{namePlural}}"
+                                    <Link to="/{{boundedContext.nameCamelCase}}/{{namePlural}}"
                                         className="btn btn_blue_h46 w_100">목록</Link>
                                 </div>
                                 <div className="right_col btn1" style=\{{marginTop: "5px", marginRight: "11%"}}>
@@ -149,7 +149,7 @@ function EgovNoticeDetail(props) {
                                         autoFocus
                                         margin="dense"
                                         id="{{#fieldDescriptors}}{{#if isKey}}{{name}}{{/if}}{{/fieldDescriptors}}"
-                                        label="{{#fieldDescriptors}}{{#if isKey}}{{namePascalCase}}{{/if}}{{/fieldDescriptors}}"
+                                        label="{{#fieldDescriptors}}{{#if isKey}}{{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}{{/if}}{{/fieldDescriptors}}"
                                         type="text"
                                         fullWidth
                                     />
