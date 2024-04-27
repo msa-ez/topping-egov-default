@@ -1,4 +1,4 @@
-forEach: BoundedContext
+forEach: Model
 fileName: EgovLeftNavIntro.jsx
 path: egov-default-frontend/src/components/leftmenu
 ---
