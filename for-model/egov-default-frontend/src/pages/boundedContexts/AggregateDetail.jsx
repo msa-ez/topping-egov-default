@@ -105,11 +105,17 @@ function EgovNoticeDetail(props) {
                                 <div className="tit">{{#wrapMustache keyFieldDescriptor.name}}{{/wrapMustache}}</div>
                                 <div className="info">
                                     <dl>
-                                    {{#aggregateRoot.fieldDescriptors}}{{#if isList}}
-                                        <dt>{{nameCamelCase}}</dt>
-                                        <dd>{boardDetail && boardDetail.{{nameCamelCase}} }</dd>
-                                    {{/if}}{{/aggregateRoot.fieldDescriptors}}
+                                        <dt>{{keyFieldDescriptor.namePascalCase}}</dt>
+                                        <dd>{{#wrapMustache keyFieldDescriptor.name}}{{/wrapMustache}}</dd>
                                     </dl>
+                                    {{#aggregateRoot.fieldDescriptors}}
+                                    {{#unless isKey}}
+                                    <dl>
+                                        <dt>{{namePascalCase}}</dt>
+                                        <dd>{boardDetail && boardDetail.{{nameCamelCase}} }</dd>
+                                    </dl>
+                                    {{/unless}}
+                                    {{/aggregateRoot.fieldDescriptors}}
                                 </div>
                             </div>
                             <div className="board_btn_area">
@@ -148,7 +154,7 @@ function EgovNoticeDetail(props) {
                         {{#commands}}
                         {{#if isExtendedVerb}}
                         <div>
-                            <Dialog open={{{nameCamelCase}}open} onClose={() => set{{namePascalCase}}Open(false)}>
+                            <Dialog open={{# wrapHeadMustache nameCamelCase}}{{/wrapHeadMustache}}open} onClose={() => set{{namePascalCase}}Open(false)}>
                                 <DialogTitle>{{namePascalCase}}</DialogTitle>
                                 <DialogContent>
                                     <TextField 
@@ -196,6 +202,12 @@ export default EgovNoticeDetail;
     window.$HandleBars.registerHelper('wrapMustache', function (field) {
         if (field) {
             return '{'+ field + '}';
+        }
+        return field;
+    });
+    window.$HandleBars.registerHelper('wrapHeadMustache', function (field) {
+        if (field) {
+            return '{'+ field;
         }
         return field;
     });
