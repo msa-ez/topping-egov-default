@@ -124,7 +124,7 @@ function EgovNoticeEdit(props) {
                                     <label htmlFor="nttSj">{{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}</label>
                                 </dt>
                                 <dd>
-                                    <input className="f_input2 w_full" id="{{nameCamelCase}}" name="{{nameCamelCase}}" type="text"
+                                    <input className="f_input2 w_full" id="{{nameCamelCase}}" name="{{#ifNotNull nameCamelCase}}{{/ifNotNull}}" type="text"
                                         onChange={e => setBoardDetail({ ...boardDetail, {{nameCamelCase}}: e.target.value })}
                                         maxLength="60" />
                                 </dd>

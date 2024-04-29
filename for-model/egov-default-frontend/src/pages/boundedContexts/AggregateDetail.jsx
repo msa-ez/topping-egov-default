@@ -97,7 +97,7 @@ function EgovNoticeDetail(props) {
                 <div className="location">
                     <ul>
                         <li><Link to={URL.MAIN} className="home">Home</Link></li>
-                        <li><Link to="/{{boundedContext.nameCamelCase}}/{{namePlural}}">{{namePascalCase}}</Link></li>
+                        <li><Link to="/{{boundedContext.nameCamelCase}}/{{namePlural}}">{{#ifNotNull namePascalCase}}{{/ifNotNull}}</Link></li>
                         <li>{masterBoard && masterBoard.bbsNm}</li>
                     </ul>
                 </div>
@@ -112,7 +112,7 @@ function EgovNoticeDetail(props) {
                         {/* <!-- 본문 --> */}
 
                         <div className="top_tit">
-                            <h1 className="tit_1">{{namePascalCase}}</h1>
+                            <h1 className="tit_1">{{#ifNotNull namePascalCase}}{{/ifNotNull}}</h1>
                         </div>
 
                         {/* <!-- 게시판 상세보기 --> */}
@@ -121,13 +121,13 @@ function EgovNoticeDetail(props) {
                                 <div className="tit">{{#wrapMustache keyFieldDescriptor.name}}{{/wrapMustache}}</div>
                                 <div className="info">
                                     <dl>
-                                        <dt>{{keyFieldDescriptor.namePascalCase}}</dt>
+                                        <dt>{{#ifNotNull keyFieldDescriptor.namePascalCase}}{{/ifNotNull}}</dt>
                                         <dd>{{#wrapMustache keyFieldDescriptor.name}}{{/wrapMustache}}</dd>
                                     </dl>
                                     {{#aggregateRoot.fieldDescriptors}}
                                     {{#unless isKey}}
                                     <dl>
-                                        <dt>{{namePascalCase}}</dt>
+                                        <dt>{{#ifNotNull namePascalCase}}{{/ifNotNull}}</dt>
                                         <dd>{boardDetail && boardDetail.{{nameCamelCase}} }</dd>
                                     </dl>
                                     {{/unless}}
@@ -146,7 +146,7 @@ function EgovNoticeDetail(props) {
                                             set{{namePascalCase}}Open(true);
                                             }
                                         }}>
-                                            {{namePascalCase}}
+                                            {{#ifNotNull namePascalCase}}{{/ifNotNull}}
                                         </button>
                                         {{/if}}
                                         {{/commands}}
@@ -189,7 +189,7 @@ function EgovNoticeDetail(props) {
                                         Cancel
                                     </button>
                                     <button onClick={{#wrapMustache nameCamelCase}}{{/wrapMustache}} className="btn btn_blue_h46 w_100">
-                                    {{namePascalCase}}
+                                    {{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}
                                     </button>
                                 </DialogActions>
                             </Dialog>
