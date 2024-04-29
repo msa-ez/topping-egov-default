@@ -19,7 +19,7 @@ function EgovLeftNavIntro() {
                 <div className="inner">
                     <h2>{{../namePascalCase}}</h2>
                     <ul className="menu4">
-                        <li><NavLink to="/{{../nameCamelCase}}/{{namePlural}}" className={({ isActive }) => (isActive ? "cur" : "")}>{{namePascalCase}}</NavLink></li>
+                        <li><NavLink to="/{{../nameCamelCase}}/{{namePlural}}" className={({ isActive }) => (isActive ? "cur" : "")}>{{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}</NavLink></li>
                     </ul>
                 </div>
             </div>
