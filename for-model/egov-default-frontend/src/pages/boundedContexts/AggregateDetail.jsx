@@ -72,7 +72,7 @@ function EgovNoticeDetail(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    fetch{{namePascalCase}}List({{keyFieldDescriptor.name}}){
+    fetch{{namePascalCase}}({{keyFieldDescriptor.name}}){
         axios.get(`/{{namePlural}}/{{#wrapKeyField keyFieldDescriptor.name}}{{/wrapKeyField}}`)
         .then(response => {
             setBoardDetail(response.data);
@@ -90,12 +90,14 @@ function EgovNoticeDetail(props) {
     function {{nameCamelCase}}(){
 
         axios.put(`/{{../namePlural}}/{{#wrapKeyField ../keyFieldDescriptor.name}}{{/wrapKeyField}}/{{#if controllerInfo.apiPath}}{{controllerInfo.apiPath}}{{else}}{{#changeLowerCase nameCamelCase}}{{/changeLowerCase}}{{/if}}`, {{#wrapHeadMustache ../keyFieldDescriptor.name}}{{/wrapHeadMustache}}: entity }) 
-        if(!{{../keyFieldDescriptor.name}}){
-            navigate({pathname: URL.ERROR}, {state: {msg: resp.resultMessage}});
-        }else{
-            set{{namePascalCase}}Open(false);
-            fetch{{../namePascalCase}}List({{../keyFieldDescriptor.name}});
-        }
+        .then(response => {
+            const resp = response.data
+            if(!{{!resp}}){
+                navigate({pathname: URL.ERROR}, {state: {msg: resp.resultMessage}});
+            }else{
+                set{{namePascalCase}}Open(false);
+                fetch{{../namePascalCase}}({{../keyFieldDescriptor.name}});
+            }
     }
     {{/if}}
     {{/commands}}
