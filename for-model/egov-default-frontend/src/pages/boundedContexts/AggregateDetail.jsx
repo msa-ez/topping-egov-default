@@ -94,7 +94,7 @@ function EgovNoticeDetail(props) {
             navigate({pathname: URL.ERROR}, {state: {msg: resp.resultMessage}});
         }else{
             set{{namePascalCase}}Open(false);
-            fetch{{namePascalCase}}List({{../keyFieldDescriptor.name}});
+            fetch{{../namePascalCase}}List({{../keyFieldDescriptor.name}});
         }
     }
     {{/if}}
