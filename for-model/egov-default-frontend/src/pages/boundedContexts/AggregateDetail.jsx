@@ -171,7 +171,7 @@ function EgovNoticeDetail(props) {
                         {{#if isExtendedVerb}}
                         <div>
                             <Dialog open={{# wrapHeadMustache nameCamelCase}}{{/wrapHeadMustache}}open} onClose={() => set{{namePascalCase}}Open(false)}>
-                                <DialogTitle>{{#ifNotNull namePascalCase}}{{/ifNotNull}}</DialogTitle>
+                                <DialogTitle>{{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}</DialogTitle>
                                 <DialogContent>
                                     <TextField 
                                         autoFocus
