@@ -72,19 +72,30 @@ function EgovNoticeDetail(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    fetch{{namePascalCase}}List({{keyFieldDescriptor.name}}){
+        axios.get(`/{{namePlural}}/{{#wrapKeyField keyFieldDescriptor.name}}{{/wrapKeyField}}`)
+        .then(response => {
+            setBoardDetail(response.data);
+        })
+    }
+
     function deleteList(){
         axios.delete(`/{{namePlural}}/{{#wrapKeyField keyFieldDescriptor.name}}{{/wrapKeyField}}`)
         navigate('/{{boundedContext.nameCamelCase}}/{{namePlural}}');
     }
+
     {{#if commands}}
     {{#commands}}
     {{#if isExtendedVerb}}
     function {{nameCamelCase}}(){
 
-        axios.put(`/orders/{{#wrapKeyField ../keyFieldDescriptor.name}}{{/wrapKeyField}}/acceptorder`, {{#wrapHeadMustache ../keyFieldDescriptor.name}}{{/wrapHeadMustache}}: entity }) 
-        .then(response => {
-            // set{{namePascalCase}}Open(false);
-        })
+        axios.put(`/{{../namePlural}}/{{#wrapKeyField ../keyFieldDescriptor.name}}{{/wrapKeyField}}/{{#if controllerInfo.apiPath}}{{controllerInfo.apiPath}}{{else}}{{#changeLowerCase nameCamelCase}}{{/changeLowerCase}}{{/if}}`, {{#wrapHeadMustache ../keyFieldDescriptor.name}}{{/wrapHeadMustache}}: entity }) 
+        if(!{{../keyFieldDescriptor.name}}){
+            navigate({pathname: URL.ERROR}, {state: {msg: resp.resultMessage}});
+        }else{
+            set{{namePascalCase}}Open(false);
+            fetch{{namePascalCase}}List({{../keyFieldDescriptor.name}});
+        }
     }
     {{/if}}
     {{/commands}}
@@ -228,5 +239,11 @@ export default EgovNoticeDetail;
             return '{'+ field;
         }
         return field;
+    });
+    window.$HandleBars.registerHelper('changeLowerCase', function (str) {
+        if (str) {
+            return str.toLowerCase();
+        }
+        return str;
     });
 </function>
