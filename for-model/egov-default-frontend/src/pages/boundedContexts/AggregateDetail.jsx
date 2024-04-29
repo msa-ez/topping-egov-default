@@ -186,7 +186,7 @@ function EgovNoticeDetail(props) {
                                 </DialogContent>
                                 <DialogActions>
                                     <button onClick={() => set{{namePascalCase}}Open(false)} className="btn btn_blue_h46 w_100">
-                                        Cancel
+                                        취소
                                     </button>
                                     <button onClick={{#wrapMustache nameCamelCase}}{{/wrapMustache}} className="btn btn_blue_h46 w_100">
                                     {{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}
