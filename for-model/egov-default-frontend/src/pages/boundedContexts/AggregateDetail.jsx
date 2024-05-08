@@ -92,7 +92,7 @@ function EgovNoticeDetail(props) {
         axios.put(`/{{../namePlural}}/{{#wrapKeyField ../keyFieldDescriptor.name}}{{/wrapKeyField}}/{{#if controllerInfo.apiPath}}{{controllerInfo.apiPath}}{{else}}{{#changeLowerCase nameCamelCase}}{{/changeLowerCase}}{{/if}}`, {{#wrapHeadMustache ../keyFieldDescriptor.name}}{{/wrapHeadMustache}}: entity }) 
         .then(response => {
             const resp = response.data
-            if(!{{!resp}}){
+            if(!resp){
                 navigate({pathname: URL.ERROR}, {state: {msg: resp.resultMessage}});
             }else{
                 set{{namePascalCase}}Open(false);
