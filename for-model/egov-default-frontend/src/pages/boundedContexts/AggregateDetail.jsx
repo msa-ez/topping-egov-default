@@ -103,7 +103,7 @@ function EgovNoticeDetail(props) {
     {{/if}}
     {{/commands}}
     {{/if}}
-}
+
 
     return (
         <div className="container">
@@ -219,7 +219,7 @@ function EgovNoticeDetail(props) {
             </div>
         </div>
     );
-}}
+}
 export default EgovNoticeDetail;
 
 <function>
