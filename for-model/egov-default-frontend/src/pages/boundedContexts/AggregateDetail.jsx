@@ -72,7 +72,7 @@ function EgovNoticeDetail(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    fetch{{namePascalCase}}({{keyFieldDescriptor.name}}){
+    function fetch{{namePascalCase}}({{keyFieldDescriptor.name}}){
         axios.get(`/{{namePlural}}/{{#wrapKeyField keyFieldDescriptor.name}}{{/wrapKeyField}}`)
         .then(response => {
             setBoardDetail(response.data);
@@ -98,10 +98,12 @@ function EgovNoticeDetail(props) {
                 set{{namePascalCase}}Open(false);
                 fetch{{../namePascalCase}}({{../keyFieldDescriptor.name}});
             }
+        });
     }
     {{/if}}
     {{/commands}}
     {{/if}}
+}
 
     return (
         <div className="container">
@@ -217,9 +219,7 @@ function EgovNoticeDetail(props) {
             </div>
         </div>
     );
-}
-
-
+}}
 export default EgovNoticeDetail;
 
 <function>
