@@ -68,7 +68,7 @@ function EgovNoticeEdit(props) {
             if (response.data.{{camelcase keyFieldDescriptor.name}}) {
                 navigate('/{{boundedContext.nameCamelCase}}/{{namePlural}}');
             } else {
-                navigate({pathname: URL.ERROR}, {state: {msg: "{{camelcase keyFieldDescriptor.name}} doesn`t exit"}});
+                navigate({pathname: URL.ERROR}, {state: {msg: ""}});
             }
         })
         .catch(error => {
