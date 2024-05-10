@@ -65,7 +65,7 @@ function EgovNoticeEdit(props) {
         axios.post('/{{namePlural}}', entity)
         .then(response => {
             const resp = response.data;
-            if (resp._links.self.href.split('/').pop()) {
+            if (response.data.{{{{camelcase keyFieldDescriptor.name}}}}) {
                 navigate('/{{boundedContext.nameCamelCase}}/{{namePlural}}');
             } else {
                 navigate({pathname: URL.ERROR}, {state: {msg: resp.resultMessage}});
