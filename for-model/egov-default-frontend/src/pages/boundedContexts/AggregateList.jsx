@@ -56,7 +56,7 @@ function EgovNoticeList(props) {
                             className="list_item">
                             {{#aggregateRoot.fieldDescriptors}}
                             {{#if isKey}}
-                            <div>{{#validateKeyType ../keyFieldDescriptor.className}}{{/validateKeyType}}</div>
+                            <div>{{#validateKeyType ../keyFieldDescriptor.className ../keyFieldDescriptor.nameCamelCase}}{{/validateKeyType}}</div>
                             {{else}}
                             <div>{resp[i].{{#wrapField nameCamelCase}}{{/wrapField}}</div>
                             {{/if}}
@@ -192,11 +192,11 @@ window.$HandleBars.registerHelper('wrapField', function (field) {
     return field;
 });
 
-window.$HandleBars.registerHelper('validateKeyType', function (keyField) {
-    if(keyField.type == 'Long'){
+window.$HandleBars.registerHelper('validateKeyType', function (keyFieldType, keyFieldName) {
+    if(keyFieldType == 'Long'){
         return '{i}'
     }else{
-        return '{resp[i]' + keyField.name + '}';
+        return '{resp[i]' + keyFieldName + '}';
     }
 });
 
