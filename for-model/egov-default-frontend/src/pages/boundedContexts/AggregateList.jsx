@@ -33,7 +33,7 @@ function EgovNoticeList(props) {
     const retrieveList = useCallback((searchCondition) => {
         console.groupCollapsed("EgovNoticeList.retrieveList()");
 
-        const retrieveListURL = '/{{namePlural}}'+EgovNet.getQueryString(searchCondition);;
+        const retrieveListURL = '/{{namePlural}}';
         const requestOptions = {
             method: "GET",
             headers: {
@@ -44,37 +44,26 @@ function EgovNoticeList(props) {
         EgovNet.requestFetch(retrieveListURL,
             requestOptions,
             (resp) => {
-
                 let mutListTag = [];
-                mutListTag.push(<p className="no_data" key="0">검색된 결과가 없습니다.</p>); // 게시판 목록 초기값
-                
-                const resultCnt = parseInt(resp.page.totalElements);
-                const currentPageNo = resp.page.number;
-                const pageSize = resp.page.size;
-
-                // 리스트 항목 구성
-                resp._embedded.{{namePlural}}.forEach(function (item, index) {
-                    if (index === 0) mutListTag = []; // 목록 초기화
-                    const listIdx = itemIdxByPage(resultCnt , currentPageNo, pageSize, index);
-
+                for(let i = 0; i< resp.length; i++){
+                    if(resp.length == 0) mutListTag =[];
                     mutListTag.push(
                         <Link
-                            to={{#wrap2}}pathname: "/{{boundedContext.nameCamelCase}}/{{namePascalCase}}Detail"{{/wrap2}}
-                            state={{#wrap2}}
-                                {{keyFieldDescriptor.name}}: item._links.self.href.split('/').pop(),
-                                searchCondition: searchCondition
-                            {{/wrap2}}
-                            key={listIdx}
+                            to=\{{pathname: "/{{nameCamelCase}}/{{namePascalCase}}Detail"}}
+                            state=\{{
+                                {{keyFieldDescriptor.nameCamelCase}}: resp[i].{{keyFieldDescriptor.nameCamelCase}},
+                                searchCondition: searchCondition}}                            
                             className="list_item">
-                            <div>{item._links.self.href.split('/').pop()}</div>
                             {{#aggregateRoot.fieldDescriptors}}
-                            {{#unless isKey}}
-                            <div>{item.{{#wrapField nameCamelCase}}{{/wrapField}}</div>    
-                            {{/unless}}
+                            {{#if isKey}}
+                            <div>{{#validateKeyType ../keyFieldDescriptor.className}}{{/validateKeyType}}</div>
+                            {{else}}
+                            <div>{resp[i].{{#wrapField nameCamelCase}}{{/wrapField}}</div>
+                            {{/if}}
                             {{/aggregateRoot.fieldDescriptors}}
-                        </Link>
+                       </Link>
                     );
-                });
+                };
                 setListTag(mutListTag);
             },
             function (resp) {
@@ -201,6 +190,14 @@ window.$HandleBars.registerHelper('wrapField', function (field) {
         return field + '}'
     }
     return field;
+});
+
+window.$HandleBars.registerHelper('validateKeyType', function (keyField) {
+    if(keyField.type == 'Long'){
+        return '{i}'
+    }else{
+        return '{resp[i]' + keyField.name + '}';
+    }
 });
 
 </function>
