@@ -4,6 +4,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createRoot } from 'react-dom/client';
 {{#if (isSelectedSecurity options.rootModel.toppingPlatforms)}}
+{{#if (isSelectedEgovDefault options.rootModel.toppingPlatforms)}}
+import KeycloakProvider from './keycloakProvider';
+{{/if}}
 import Keycloak from 'keycloak-js';
 {{/if}}
 
@@ -27,6 +30,9 @@ keycloak.init({ onLoad: 'login-required' }).then(authenticated => {
   localStorage.setItem("username",keycloak.idTokenParsed.preferred_username)
   localStorage.setItem("roles",keycloak.tokenParsed.realm_access.roles.join(","))
 
+
+    {{#if (isSelectedEgovDefault options.rootModel.toppingPlatforms)}}
+    {{/if}}
     root.render(
       <React.StrictMode>
         <BrowserRouter>
@@ -64,6 +70,21 @@ window.$HandleBars.registerHelper('isSelectedSecurity', function (selectedSecuri
         }
 
         return isSelectedSecurity;
+    } catch(e){
+        console.log(e)
+    }
+});
+
+window.$HandleBars.registerHelper('isSelectedEgovDefault', function (toppings) {
+    try{
+        var isSelectedEgovDefault = false
+        for(var i=0; i<toppings.length; i++){
+            if(toppings[i].includes('egov-default')){
+                isSelectedEgovDefault =  true;
+            }
+        }
+
+        return isSelectedEgovDefault;
     } catch(e){
         console.log(e)
     }
