@@ -32,7 +32,16 @@ keycloak.init({ onLoad: 'login-required' }).then(authenticated => {
 
 
     {{#if (isSelectedEgovDefault options.rootModel.toppingPlatforms)}}
-    {{/if}}
+    root.render(
+      <React.StrictMode>
+        <KeycloakProvider keycloak={keycloak}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </KeycloakProvider>
+      </React.StrictMode>
+    );
+    {{else}}
     root.render(
       <React.StrictMode>
         <BrowserRouter>
@@ -40,6 +49,7 @@ keycloak.init({ onLoad: 'login-required' }).then(authenticated => {
         </BrowserRouter>
       </React.StrictMode>
     );
+    {{/if}}
   }
 }).catch(error => {
   console.error("Authentication Failed: ", error);
