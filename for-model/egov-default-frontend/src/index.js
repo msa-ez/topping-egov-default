@@ -30,8 +30,6 @@ keycloak.init({ onLoad: 'login-required' }).then(authenticated => {
   localStorage.setItem("username",keycloak.idTokenParsed.preferred_username)
   localStorage.setItem("roles",keycloak.tokenParsed.realm_access.roles.join(","))
 
-
-    {{#if (isSelectedEgovDefault options.rootModel.toppingPlatforms)}}
     root.render(
       <React.StrictMode>
         <KeycloakProvider keycloak={keycloak}>
@@ -41,15 +39,6 @@ keycloak.init({ onLoad: 'login-required' }).then(authenticated => {
         </KeycloakProvider>
       </React.StrictMode>
     );
-    {{else}}
-    root.render(
-      <React.StrictMode>
-        <BrowserRouter>
-          <App keycloak={keycloak} />
-        </BrowserRouter>
-      </React.StrictMode>
-    );
-    {{/if}}
   }
 }).catch(error => {
   console.error("Authentication Failed: ", error);
