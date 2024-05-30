@@ -34,7 +34,7 @@ function EgovAboutLocation() {
 
                         <div className="map">
                             <a href="https://naver.me/FHYuP0ok" target="_blank" rel="noreferrer">
-                                <img src="/assets/images/map.png" alt="" />
+                                <img src="https://github.com/msa-ez/topping-egov-default/assets/123912988/9e4315e1-6426-473b-8bc0-b952c3ccb6df" alt="" />
                             </a>
                         </div>
 
@@ -56,7 +56,7 @@ function EgovAboutLocation() {
                                     리더를 이용해 사진·<br />
                                     지도 등 다양한 정보를<br />
                                     확인하세요.</p>
-                                <img className="qr" src="/assets/images/qrcode.png" alt="qr code" />
+                                <img className="qr" src="https://github.com/msa-ez/topping-egov-default/assets/123912988/d85bd0a6-49ff-4945-b5e5-8afe8d91fe22" alt="qr code" />
                             </div>
                         </div>
 

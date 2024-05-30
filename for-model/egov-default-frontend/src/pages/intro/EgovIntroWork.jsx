@@ -43,8 +43,8 @@ function EgovIntroWork() {
                             그램, 데이터 개발을 표준화가 용이하도록 지원하는 응용프로그램 환경</p>
 
                         <p className="img">
-                            <img className="w" src="/assets/images/img_business_intro.png" alt=""/>
-                            <img className="m" src="/assets/images/img_business_intro_m.png" alt=""/>
+                            <img className="w" src="https://github.com/msa-ez/topping-egov-default/assets/123912988/8c15a6e3-b614-484b-bbd2-bc8eec4a34e5" alt=""/>
+                            <img className="m" src="https://github.com/msa-ez/topping-egov-default/assets/123912988/bd4109dd-bd48-43cb-95cc-a20a50c7ee6f" alt=""/>
                         </p>
 
                         {/* <!--// 본문 --> */}

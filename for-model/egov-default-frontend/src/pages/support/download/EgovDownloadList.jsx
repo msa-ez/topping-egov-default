@@ -65,7 +65,7 @@ function EgovDownloadList() {
                             <ul>
                                 <li>
                                     <Link to={URL.SUPPORT_DOWNLOAD_DETAIL}>
-                                        <img src="/assets/images/sample_pds_list.png" alt=""/>
+                                        <img src="https://github.com/msa-ez/topping-egov-default/assets/123912988/acfc2db8-3d69-49cc-aa96-688a8520c7ab" alt=""/>
                                         <span>
                                             <strong>egovframe installer v1.03</strong>
                                             <span>egovframe의 템플릿 설치를 도와주는 
@@ -76,7 +76,7 @@ function EgovDownloadList() {
                                 </li>
                                 <li>
                                     <Link to={URL.SUPPORT_DOWNLOAD_DETAIL}>
-                                        <img src="/assets/images/sample_pds_list.png" alt=""/>
+                                        <img src="https://github.com/msa-ez/topping-egov-default/assets/123912988/acfc2db8-3d69-49cc-aa96-688a8520c7ab" alt=""/>
                                         <span>
                                             <strong>egovframe installer v1.03</strong>
                                             <span>egovframe의 템플릿 설치를 도와주는 
@@ -87,7 +87,7 @@ function EgovDownloadList() {
                                 </li>
                                 <li>
                                     <Link to={URL.SUPPORT_DOWNLOAD_DETAIL}>
-                                        <img src="/assets/images/sample_pds_list.png" alt=""/>
+                                        <img src="https://github.com/msa-ez/topping-egov-default/assets/123912988/acfc2db8-3d69-49cc-aa96-688a8520c7ab" alt=""/>
                                         <span>
                                             <strong>egovframe installer v1.03</strong>
                                             <span>egovframe의 템플릿 설치를 도와주는 
@@ -98,7 +98,7 @@ function EgovDownloadList() {
                                 </li>
                                 <li>
                                     <Link to={URL.SUPPORT_DOWNLOAD_DETAIL}>
-                                        <img src="/assets/images/sample_pds_list.png" alt=""/>
+                                        <img src="https://github.com/msa-ez/topping-egov-default/assets/123912988/acfc2db8-3d69-49cc-aa96-688a8520c7ab" alt=""/>
                                         <span>
                                             <strong>egovframe installer v1.03</strong>
                                             <span>egovframe의 템플릿 설치를 도와주는 

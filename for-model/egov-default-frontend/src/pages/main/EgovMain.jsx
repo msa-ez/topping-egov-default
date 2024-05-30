@@ -100,7 +100,7 @@ function EgovMain(props) {
             <div className="c_wrap">
                 <div className="colbox">
                     <div className="left_col">
-                        <img src="/assets/images/img_simple_main.png" alt="단순 홈페이지 전자정부 표준프레임워크의 경량환경 내부업무에 대한 최신 정보와 기술을 제공하고 있습니다." />
+                        <img src="https://github.com/msa-ez/topping-egov-default/assets/123912988/411fe0ba-4563-4460-bf48-cefef862b5cc" alt="단순 홈페이지 전자정부 표준프레임워크의 경량환경 내부업무에 대한 최신 정보와 기술을 제공하고 있습니다." />
                     </div>
 
                     <div className="right_col">

@@ -17,7 +17,7 @@ function EgovInfoPopup(){
                     <li>사이트소개, 정보마당, 고객지원 메뉴는 구성을 위한 샘플페이지가 제공되며 기능은 구현되지 않은 상태입니다.</li>
                 </ul>
                 <div className="img">
-                    <img src="/assets/images/img_template_intro.png" alt=""/>
+                    <img src="https://github.com/msa-ez/topping-egov-default/assets/123912988/b1510454-e299-4a37-b668-f94f9ed5a9cf" alt=""/>
                 </div>
 
             </div>

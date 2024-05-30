@@ -60,8 +60,8 @@ function EgovHeader() {
                 <Link to={URL.MAIN} className="ico lnk_go_template" target="_blank">홈페이지 템플릿 소개 페이지로 이동</Link>
 
                 <h1 className="logo">
-                    <Link to={URL.MAIN} className="w"><img src="/assets/images/logo_w.png" alt="표준프레임워크포털 eGovFrame 심플홈페이지" /></Link>
-                    <Link to={URL.MAIN} className="m"><img src="/assets/images/logo_m.png" alt="표준프레임워크포털 eGovFrame 심플홈페이지" /></Link>
+                    <Link to={URL.MAIN} className="w"><img src="https://github.com/msa-ez/topping-egov-default/assets/123912988/515b47f6-3e4b-43c5-97db-fdc33a8553b6" alt="표준프레임워크포털 eGovFrame 심플홈페이지" /></Link>
+                    <Link to={URL.MAIN} className="m"><img src="https://github.com/msa-ez/topping-egov-default/assets/123912988/9952256c-89ac-4289-8886-ff870976d681" alt="표준프레임워크포털 eGovFrame 심플홈페이지" /></Link>
                 </h1>
 
                 <div className="gnb">
