@@ -23,7 +23,7 @@ body {min-width: 1400px;}
 .header .gnb ul li a.cur {color: #222;}
 
 .header .right_a {position: absolute; right: 50px; top: 75px;}
-.header .right_a .btn {width: 30px; height: 30px; font-size: 0; background: url(css/images/ico_allmenu.png) no-repeat right; background-size: 22px 18px;}
+.header .right_a .btn {width: 30px; height: 30px; font-size: 0; background: url("https://github.com/kyusooK/egov-test/assets/123912988/d2908b7c-ef02-4508-9101-0da927077a13") no-repeat right; background-size: 22px 18px;}
 .header .right_a .btn.active {background: url("https://github.com/msa-ez/topping-egov-default/assets/123912988/0d78cac9-e48d-48e8-aaa4-54e3b84be755") no-repeat right; background-size: 22px 18px;}
 .header .right_a .btn.mobile {display: none;}
 
