@@ -13,7 +13,7 @@ import URL from 'constants/url'
 import EgovPaging from 'components/EgovPaging'
 import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavInform'
 
-import { itemIdxByPage } from 'utils/calc'
+// import { itemIdxByPage } from 'utils/calc'
 
 function EgovNoticeList(props) {
 
@@ -23,10 +23,10 @@ function EgovNoticeList(props) {
     const bbsId = location.state?.bbsId || NOTICE_BBS_ID; 
 
 	// eslint-disable-next-line no-unused-vars
-    const [searchCondition, setSearchCondition] = useState(location.state?.searchCondition || { bbsId: bbsId, pageIndex: 1, searchCnd: '0', searchWrd: '' });// 기존 조회에서 접근 했을 시 || 신규로 접근 했을 시
-    const [masterBoard, setMasterBoard] = useState({});
-    const [user, setUser] = useState({});
-    const [paginationInfo, setPaginationInfo] = useState({});
+    const [searchCondition] = useState(location.state?.searchCondition || { bbsId: bbsId, pageIndex: 1, searchCnd: '0', searchWrd: '' });// 기존 조회에서 접근 했을 시 || 신규로 접근 했을 시
+    // const [masterBoard, setMasterBoard] = useState({});
+    // const [user, setUser] = useState({});
+    const [paginationInfo] = useState({});
 
     const [listTag, setListTag] = useState([]);
 
@@ -46,7 +46,7 @@ function EgovNoticeList(props) {
             (resp) => {
                 let mutListTag = [];
                 for(let i = 0; i< resp.length; i++){
-                    if(resp.length == 0) mutListTag =[];
+                    if(resp.length === 0) mutListTag =[];
                     mutListTag.push(
                         <Link
                             to=\{{pathname: "/{{nameCamelCase}}/{{namePascalCase}}Detail"}}

@@ -4,7 +4,7 @@ path: egov-default-frontend/src/components/leftmenu
 ---
 import React from 'react';
 
-import URL from 'constants/url';
+// import URL from 'constants/url';
 import { NavLink } from 'react-router-dom';
 
 function EgovLeftNavInform() { 

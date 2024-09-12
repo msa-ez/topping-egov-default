@@ -7,15 +7,15 @@ import React, { useEffect, useState } from 'react'
 
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-import * as EgovNet from 'api/egovFetch'
-import { NOTICE_BBS_ID } from 'config'
+// import * as EgovNet from 'api/egovFetch'
+// import { NOTICE_BBS_ID } from 'config'
 import CODE from 'constants/code'
 import URL from 'constants/url'
 import axios from 'axios';
 
-import EgovAttachFile from 'components/EgovAttachFile'
+// import EgovAttachFile from 'components/EgovAttachFile'
 import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavInform'
-import bbsFormVaildator from 'utils/bbsFormVaildator'
+// import bbsFormVaildator from 'utils/bbsFormVaildator'
 
 function EgovNoticeEdit(props) {
     console.group("EgovNoticeEdit");
@@ -26,13 +26,13 @@ function EgovNoticeEdit(props) {
     const location = useLocation();
     console.log("EgovNoticeEdit [location] : ", location);
 
-    const bbsId = location.state?.bbsId || NOTICE_BBS_ID;
-    const nttId = location.state?.nttId || "";
+    // const bbsId = location.state?.bbsId || NOTICE_BBS_ID;
+    // const nttId = location.state?.nttId || "";
 
     const [modeInfo, setModeInfo] = useState({ mode: props.mode });
-    const [masterBoard, setMasterBoard] = useState({});
+    const [masterBoard] = useState({});
     const [boardDetail, setBoardDetail] = useState({ nttSj: '', nttCn: '' });
-    const [boardAttachFiles, setBoardAttachFiles] = useState();
+    // const [boardAttachFiles, setBoardAttachFiles] = useState();
 
     const initMode = () => {
         switch (props.mode) {
@@ -64,7 +64,6 @@ function EgovNoticeEdit(props) {
 
         axios.post('/{{namePlural}}', entity)
         .then(response => {
-            const resp = response.data;
             if (response.data.{{keyFieldDescriptor.nameCamelCase}}) {
                 navigate('/{{boundedContext.nameCamelCase}}/{{namePlural}}');
             } else {

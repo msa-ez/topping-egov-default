@@ -8,20 +8,14 @@ import { useEffect, useState } from 'react'
 
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import TextField from '@mui/material/TextField';
-
 import axios from 'axios';
 
 import * as EgovNet from 'api/egovFetch'
-import { NOTICE_BBS_ID } from 'config'
-import CODE from 'constants/code'
+// import { NOTICE_BBS_ID } from 'config'
+// import CODE from 'constants/code'
 import URL from 'constants/url'
 
-import EgovAttachFile from 'components/EgovAttachFile'
+// import EgovAttachFile from 'components/EgovAttachFile'
 import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavInform'
 
 function EgovNoticeDetail(props) {
@@ -34,7 +28,7 @@ function EgovNoticeDetail(props) {
 
     // const bbsId = location.state.bbsId || NOTICE_BBS_ID;
     const {{keyFieldDescriptor.name}} = location.state.{{keyFieldDescriptor.name}};
-    const searchCondition = location.state.searchCondition;
+    // const searchCondition = location.state.searchCondition;
 
     {{#if commands}}
     {{#commands}}
@@ -45,12 +39,12 @@ function EgovNoticeDetail(props) {
     {{/if}}
     const condition = true; 
 
-    const [entity, setEntity] = useState("");
+    // const [entity, setEntity] = useState("");
 
-    const [masterBoard, setMasterBoard] = useState({});
-    const [user, setUser] = useState({});
+    const [masterBoard] = useState({});
+    // const [user, setUser] = useState({});
     const [boardDetail, setBoardDetail] = useState({});
-    const [boardAttachFiles, setBoardAttachFiles] = useState();
+    // const [boardAttachFiles, setBoardAttachFiles] = useState();
 
     const retrieveDetail = () => {
         const retrieveDetailURL = `/{{namePlural}}/{{#wrapKeyField keyFieldDescriptor.name}}{{/wrapKeyField}}`;
@@ -72,12 +66,12 @@ function EgovNoticeDetail(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    function fetch{{namePascalCase}}({{keyFieldDescriptor.name}}){
-        axios.get(`/{{namePlural}}/{{#wrapKeyField keyFieldDescriptor.name}}{{/wrapKeyField}}`)
-        .then(response => {
-            setBoardDetail(response.data);
-        })
-    }
+    // function fetch{{namePascalCase}}({{keyFieldDescriptor.name}}){
+    //     axios.get(`/{{namePlural}}/{{#wrapKeyField keyFieldDescriptor.name}}{{/wrapKeyField}}`)
+    //     .then(response => {
+    //         setBoardDetail(response.data);
+    //     })
+    // }
 
     function deleteList(){
         axios.delete(`/{{namePlural}}/{{#wrapKeyField keyFieldDescriptor.name}}{{/wrapKeyField}}`)
