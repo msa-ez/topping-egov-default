@@ -8,6 +8,12 @@ import { useEffect, useState } from 'react'
 
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import TextField from '@mui/material/TextField';
+
 import axios from 'axios';
 
 import * as EgovNet from 'api/egovFetch'
@@ -20,11 +26,10 @@ import { default as EgovLeftNav } from 'components/leftmenu/EgovLeftNavInform'
 
 function EgovNoticeDetail(props) {
     console.group("EgovNoticeDetail");
-    console.log("EgovNoticeDetail [props] : ", props);
+    const [entity, setEntity] = useState("");
 
     const navigate = useNavigate();
     const location = useLocation();
-    console.log("EgovNoticeDetail [location] : ", location);
 
     // const bbsId = location.state.bbsId || NOTICE_BBS_ID;
     const {{keyFieldDescriptor.name}} = location.state.{{keyFieldDescriptor.name}};
@@ -37,7 +42,7 @@ function EgovNoticeDetail(props) {
     {{/if}}
     {{/commands}}
     {{/if}}
-    const condition = true; 
+    // const condition = true; 
 
     // const [entity, setEntity] = useState("");
 
@@ -66,12 +71,12 @@ function EgovNoticeDetail(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // function fetch{{namePascalCase}}({{keyFieldDescriptor.name}}){
-    //     axios.get(`/{{namePlural}}/{{#wrapKeyField keyFieldDescriptor.name}}{{/wrapKeyField}}`)
-    //     .then(response => {
-    //         setBoardDetail(response.data);
-    //     })
-    // }
+    function fetch{{namePascalCase}}({{keyFieldDescriptor.name}}){
+        axios.get(`/{{namePlural}}/{{#wrapKeyField keyFieldDescriptor.name}}{{/wrapKeyField}}`)
+        .then(response => {
+            setBoardDetail(response.data);
+        })
+    }
 
     function deleteList(){
         axios.delete(`/{{namePlural}}/{{#wrapKeyField keyFieldDescriptor.name}}{{/wrapKeyField}}`)
