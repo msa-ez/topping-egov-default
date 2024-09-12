@@ -124,9 +124,26 @@ REACT_APP_EGOV_CONTEXT_URL=localhost:8080
 
 ### 3. 프로젝트 실행 및 기타 명령어
 
+#### 3-1. node_modules install
 ```bash
 # 테스트용 리액트 서버를 실행할 때 아래 명령어를 사용한다.
-npm start
+cd egov-default-frontend
+npm install
+```
+#### 3.2 modify configure
+
+node_modules/react-scripts/config/webpackDevServer.config.js
+
+```
+const disableFirewall =!proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true'; // modify this code
+```
+```
+const disableFirewall = true; 
+```
+
+#### 3.3 run project
+```
+npm run start
 ```
 
 ---
