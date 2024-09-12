@@ -1,4 +1,4 @@
-name: eGov Default App
+name: eGov UI
 rating: 5
 imageUrl: https://github.com/msa-ez/template-spring-boot-egov/assets/123912988/67e70243-8377-47ac-85aa-961db52a3c31
 description: 전자정부 표준 프레임워크의 기본 애플리케이션 (게시판 관리, 일정관리, 공지사항 관리의 기본 프론트엔드와 백엔드)
