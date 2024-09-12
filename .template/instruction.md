@@ -7,8 +7,6 @@
 ![cra](https://img.shields.io/badge/createreactapp-09D3AC?style=for-the-badge&logo=createreactapp&logoColor=black)  
 ![workflow](https://github.com/eGovFramework/egovframe-template-simple-react/actions/workflows/node.js.yml/badge.svg)
 
-※ 본 프로젝트는 기존 JSP 뷰 방식에서 벗어나 BackEnd와 FrontEnd를 분리하기 위한 예시 파일로 참고만 하시길 바랍니다.  
-
 ## 프로젝트 소개
 
 ### 프로젝트 개요
@@ -76,18 +74,9 @@
 2. 기능설명 : 공통컴포넌트 일정관리(부서일정)과 게시판 기능을 커스터마이징하여 사용한다.
 3. 활용방법 : 관리자로 로그인 한 후 일정정보를 등록하거나 게시물을 등록할 수 있다. (게시판 설정 가능)
 
-## 환경 설정
-
-프로젝트에서 사용된 환경 프로그램 정보는 다음과 같다.
-
-| 프로그램 명 | 버전 명  |
-| :---------- | :------- |
-| Node.js     | v18.12.0 |
-| NPM         | v8.19.2  |
-
 ## BackEnd 구동
 
-[심플 홈페이지 Backend](https://github.com/eGovFramework/egovframe-template-simple-backend.git) 소스를 받아 구동한다.
+Fontend에 대한 기본 CRUD기능을 동작하도록 지원하는 eGov Framework Topping을 선택한다.
 
 ## FrontEnd 구동
 
@@ -97,20 +86,13 @@
 
 Git에서 복제하여 설치 시 1-1. 을 참고한다.
 
-#### 1-1. Git에서 프로젝트 복제 및 모듈 설치
+#### 1-1. Git에서 프로젝트 복제
 
 Git에서 clone 한다.
 
 ```bash
 # 프로젝트 저장소를 로컬로 복제
 git clone https://github.com/[계정명]/egovframe-template-simple-react.git
-
-# 복제된 프로젝트 디렉토리로 이동
-cd egovframe-template-simple-react
-
-# node modules를 설치해 준다.
-npm install
-```
 
 ### 2. 백엔드 프로젝트 설정
 
@@ -124,24 +106,24 @@ REACT_APP_EGOV_CONTEXT_URL=localhost:8080
 
 ### 3. 프로젝트 실행 및 기타 명령어
 
-#### 3-1. node_modules install
+#### 3-1. 모듈 설치
 ```bash
 # 테스트용 리액트 서버를 실행할 때 아래 명령어를 사용한다.
 cd egov-default-frontend
 npm install
 ```
-#### 3.2 modify configure
+#### 3.2 보안 설정
 
 node_modules/react-scripts/config/webpackDevServer.config.js
 
 ```
-const disableFirewall =!proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true'; // modify this code
+const disableFirewall =!proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true'; // 해당 코드를 아래와 같이 수정
 ```
 ```
 const disableFirewall = true; 
 ```
 
-#### 3.3 run project
+#### 3.3 프로젝트 실행
 ```
 npm run start
 ```
