@@ -42,7 +42,7 @@ function EgovNoticeDetail(props) {
     {{/if}}
     {{/commands}}
     {{/if}}
-    // const condition = true; 
+    const condition = true; 
 
     // const [entity, setEntity] = useState("");
 
